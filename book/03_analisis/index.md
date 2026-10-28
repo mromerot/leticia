@@ -4,6 +4,7 @@ short_title: 3. Análisis
 ---
 
 Seis flujos de trabajo, uno por amenaza priorizada en el [perfil de riesgos](../01_conceptos/17_perfil_riesgos.ipynb),
+un flujo de salud (dengue y clima) agregado a partir de la [revisión de la literatura](../01_conceptos/18_revision_literatura.md)
 y una síntesis. Como en SIDRo, cada flujo tiene cuatro páginas:
 
 - **a. Descripción**: la amenaza en Leticia, preguntas, cadena de análisis, datos y limitaciones;
@@ -34,7 +35,10 @@ y una síntesis. Como en SIDRo, cada flujo tiene cuatro páginas:
 * - [3.6 Lluvias intensas y vendavales](36_lluvias_vendavales/index.md)
   - ¿Qué tan intensos son los aguaceros y dónde se encharca la ciudad?
   - ERA5, DesInventar, UNGRD, Copernicus DEM, CCKP
-* - [3.7 Síntesis](37_sintesis.ipynb)
+* - [3.7 Dengue y clima](37_dengue/index.md)
+  - ¿Cómo influye el clima en el dengue y se puede anticipar un brote?
+  - SIVIGILA (OpenDengue), ERA5, ONI, TNA, CCKP
+* - [3.8 Síntesis](38_sintesis.ipynb)
   - ¿Dónde se superponen las amenazas y qué hacer primero?
   - Todos los anteriores
 ```

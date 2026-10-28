@@ -59,6 +59,11 @@ def _mensual_completo(diaria: pd.Series) -> pd.Series:
     return suma[n == suma.index.days_in_month]
 
 
+def suma_mensual(diaria: pd.Series) -> pd.Series:
+    """Suma mensual de una serie diaria, solo de meses completos."""
+    return _mensual_completo(diaria)
+
+
 def spi(precip_diaria: pd.Series, escala_meses: int = 3, base: tuple[int, int] | None = None) -> pd.Series:
     """Índice de Precipitación Estandarizado (SPI) mensual con ajuste gamma por mes calendario."""
     m = _mensual_completo(precip_diaria)
@@ -109,3 +114,32 @@ def indices_lluvia(precip: pd.Series, umbral_fuerte: float = 50) -> pd.DataFrame
 def anomalia_anual(s: pd.Series, base: tuple[int, int], como: str = "mean") -> pd.Series:
     a = s.groupby(s.index.year).agg(como)
     return a - a.loc[base[0]:base[1]].mean()
+
+
+def utci(t_c, viento_ms, td_c, trm_c=None) -> np.ndarray:
+    """Índice Universal de Clima Térmico (UTCI, °C) con la implementación del ECMWF (thermofeel), la misma de ERA5-HEAT.
+
+    t_c: temperatura del aire a 2 m; viento_ms: viento a 10 m (se limita al rango válido 0,5–17 m/s); td_c: punto de
+    rocío; trm_c: temperatura media radiante. Sin `trm_c` se usa la del aire, es decir, el UTCI **a la sombra**,
+    que subestima el estrés de quien está al sol.
+    """
+    import thermofeel
+
+    t = np.asarray(t_c, dtype=float) + 273.15
+    trm = t if trm_c is None else np.asarray(trm_c, dtype=float) + 273.15
+    va = np.clip(np.asarray(viento_ms, dtype=float), 0.5, 17)
+    return thermofeel.calculate_utci(t, va, trm, td_k=np.asarray(td_c, dtype=float) + 273.15) - 273.15
+
+
+def estres_termico_diario(horario: pd.DataFrame, categorias: dict[str, float]) -> pd.DataFrame:
+    """UTCI horario a la sombra resumido por día: máximo y horas en cada categoría de estrés por calor o más.
+
+    `horario` necesita las columnas temperature_2m, dew_point_2m y wind_speed_10m (m/s); `categorias` son los
+    umbrales inferiores de UTCI (°C) de cada categoría, p. ej. {"moderado": 26, "fuerte": 32, ...}.
+    """
+    u = pd.Series(utci(horario["temperature_2m"], horario["wind_speed_10m"], horario["dew_point_2m"]), index=horario.index)
+    dia = u.index.floor("D")
+    out = pd.DataFrame({"utci_max": u.groupby(dia).max(), "horas": u.groupby(dia).count()})
+    for nombre, umbral in categorias.items():
+        out[f"horas_{nombre}"] = (u >= umbral).groupby(dia).sum()
+    return out[out["horas"] >= 20]

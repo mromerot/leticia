@@ -38,4 +38,6 @@ hechos recientes que aún no tienen fuente técnica publicada, y se señalan com
   - ¿Cuáles son los principales riesgos según la OTCA, el Panel Científico, el IDEAM, la UNGRD y la literatura?
 * - [1.7 Perfil de riesgos (cuaderno)](17_perfil_riesgos.ipynb)
   - ¿Qué confirman los datos y cómo se priorizan las amenazas?
+* - [1.8 Flujos de la literatura](18_revision_literatura.md)
+  - ¿Qué métodos publicados (OpenAlex, Crossref) se pueden reproducir para Leticia y qué mostraron?
 ```

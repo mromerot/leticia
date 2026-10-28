@@ -7,9 +7,10 @@
 [![Contenido: CC BY 4.0](https://img.shields.io/badge/contenido-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 
 Análisis reproducible de los **riesgos de desastres y climáticos de Leticia** (Amazonas, Colombia), organizado con la
-estructura de [SIDRo](https://mromerot.github.io/SIDRo/): conceptos y evidencia, fuentes de datos y seis flujos de
+estructura de [SIDRo](https://mromerot.github.io/SIDRo/): conceptos y evidencia, fuentes de datos y siete flujos de
 análisis (inundación fluvial, sequía y estiaje, erosión y dinámica fluvial, calor extremo, incendios y humo, lluvias
-intensas y vendavales), cada uno con descripción, amenaza, riesgo y escenarios, más una síntesis multiamenaza.
+intensas y vendavales, y dengue y clima), cada uno con descripción, amenaza, riesgo y escenarios, más una síntesis
+multiamenaza. Los métodos de la literatura científica reproducidos para Leticia se resumen en la página 1.8.
 
 Todo el análisis está en **cuadernos de Jupyter compatibles con Google Colab** que descargan los datos de sus fuentes
 oficiales (IDEAM, UNGRD, DesInventar, Copernicus, NASA, Banco Mundial, Microsoft Planetary Computer) y usan el
@@ -24,6 +25,11 @@ paquete `leticia` de este repositorio. El libro se publica con [MyST](https://my
 - **Erosión y sedimentación:** ~1 700 ha de bancos e islas nuevos frente a la ciudad entre 1987 y 2024.
 - **Calor:** +0,22 °C por década en la máxima desde 1980; hasta 10 °C más en superficie en el centro que en el bosque.
 - **Incendios y vendavales:** máximos de focos de calor e incendios registrados en 2024; vendavales casi anuales.
+- **Dengue:** 4 366 casos notificados en 2007–2022, con el brote de 2019 (1 716); la temperatura media se acerca al
+  óptimo de transmisión de *Aedes aegypti*.
+- **Métodos de la literatura:** la vaciante de 2024 tuvo 132 días bajo el P80 (Santos de Lima et al., 2024); la
+  orilla del Amazonas cerca de Leticia retrocede 2–15 m/año (REAL); GloFAS adelanta unas cuatro semanas el pico de
+  la creciente.
 
 ## Ejecutar
 
@@ -41,11 +47,11 @@ myst start
 
 ```
 myst.yml, index.md        configuración y portada del libro
-book/01_conceptos/        conceptos, contexto, revisión de evidencia y perfil de riesgos (cuaderno)
+book/01_conceptos/        conceptos, contexto, revisión de evidencia, perfil de riesgos (cuaderno) y flujos de la literatura
 book/02_datos/            fuentes de datos, catálogo y área de estudio (cuaderno)
-book/03_analisis/         seis flujos (a. descripción, b. amenaza, c. riesgo, d. escenarios) y síntesis
+book/03_analisis/         siete flujos (a. descripción, b. amenaza, c. riesgo, d. escenarios) y síntesis
 book/recursos/            Colab, glosario, software, preguntas frecuentes y cómo citar
-src/leticia/              paquete de Python (fuentes, hidro, clima, espacial, exposicion, riesgo, viz)
+src/leticia/              paquete de Python (fuentes, hidro, clima, espacial, exposicion, riesgo, pronostico, salud, viz)
 src/leticia/config/       aoi.yaml, sources.yaml, parametros.yaml: todo lo específico del territorio
 tests/                    pruebas con datos sintéticos
 ```

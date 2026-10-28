@@ -1,4 +1,4 @@
-"""Indicadores de amenaza por celda para la síntesis multiamenaza (3.7).
+"""Indicadores de amenaza por celda para la síntesis multiamenaza (3.8).
 
 Reúne en una sola tabla los indicadores que cada flujo de la Sección 3 calcula por separado, a partir de las
 mismas fuentes en caché, para que la síntesis pueda ejecutarse sola (por ejemplo, en Colab).

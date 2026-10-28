@@ -318,6 +318,37 @@ def clima_diario(lat: float | None = None, lon: float | None = None, inicio: str
     return cache(f"era5_{lat:.3f}_{lon:.3f}_{inicio[:4]}.csv", _bajar, forzar)
 
 
+VARIABLES_ERA5_HORA = ["temperature_2m", "dew_point_2m", "relative_humidity_2m", "wind_speed_10m"]
+
+
+def clima_horario(lat: float | None = None, lon: float | None = None, inicio: str = "1979-01-01",
+                  fin: str | None = None, variables: list[str] | None = None, forzar: bool = False) -> pd.DataFrame:
+    """Serie horaria de ERA5 (Open-Meteo) en hora local, con el viento en m/s; por defecto el centro de Leticia.
+
+    Se pide por bloques de cinco años para no exceder el tamaño de respuesta de la API.
+    """
+    c = aoi_cfg()["centro"]
+    lat, lon = lat if lat is not None else c["lat"], lon if lon is not None else c["lon"]
+    fin = fin or f"{pd.Timestamp.today().year - 1}-12-31"
+    variables = variables or VARIABLES_ERA5_HORA
+
+    def _bajar():
+        partes = []
+        for a0 in range(int(inicio[:4]), int(fin[:4]) + 1, 5):
+            ini = max(pd.Timestamp(inicio), pd.Timestamp(f"{a0}-01-01"))
+            fn = min(pd.Timestamp(fin), pd.Timestamp(f"{a0 + 4}-12-31"))
+            r = _get(url("clima_horario"), params={
+                "latitude": lat, "longitude": lon, "start_date": ini.strftime("%Y-%m-%d"), "end_date": fn.strftime("%Y-%m-%d"),
+                "hourly": ",".join(variables), "models": "era5", "timezone": "America/Bogota", "wind_speed_unit": "ms"})
+            partes.append(pd.DataFrame(r.json()["hourly"]).set_index("time"))
+            time.sleep(2)
+        df = pd.concat(partes)
+        df.index = pd.to_datetime(df.index)
+        return df[~df.index.duplicated()].astype("float32")
+
+    return cache(f"era5_horario_{lat:.3f}_{lon:.3f}_{inicio[:4]}.parquet", _bajar, forzar)
+
+
 def caudal_glofas(lat: float | None = None, lon: float | None = None, inicio: str = "1984-01-01",
                   forzar: bool = False) -> pd.Series:
     """Caudal diario simulado por GloFAS v4 en la celda del Amazonas aguas arriba de Leticia."""
@@ -359,6 +390,25 @@ def oni() -> pd.Series:
         return pd.Series([float(f[3]) for f in filas], index=idx, name="valor").to_frame()
 
     df = cache("oni.csv", _bajar)
+    return df.iloc[:, 0] if isinstance(df, pd.DataFrame) else df
+
+
+def indice_tna() -> pd.Series:
+    """Índice del Atlántico Norte tropical (TNA, NOAA PSL): anomalía mensual de la TSM en 5,5–23,5° N y 15–57,5° O."""
+
+    def _bajar():
+        lineas = _get(url("indice_tna")).text.split("\n")
+        a0, a1 = (int(v) for v in lineas[0].split()[:2])
+        valores = {}
+        for linea in lineas[1:]:
+            p = linea.split()
+            if len(p) == 13 and p[0].isdigit() and a0 <= int(p[0]) <= a1:
+                for mes, v in enumerate(p[1:], start=1):
+                    if float(v) > -99:   # -99.99 marca los meses sin dato
+                        valores[pd.Timestamp(int(p[0]), mes, 1)] = float(v)
+        return pd.Series(valores, name="valor").to_frame()
+
+    df = cache("tna.csv", _bajar)
     return df.iloc[:, 0] if isinstance(df, pd.DataFrame) else df
 
 
@@ -627,6 +677,74 @@ def inundacion_jrc(periodo_retorno: int = 100, clave_bbox: str = "bbox_regional"
     return cache(f"jrc_inundacion_rp{periodo_retorno}_{clave_bbox}.tif", _bajar, forzar)
 
 
+# ------------------------------------------------------------------ REAL (erosión y acreción de orillas)
+_CAMPOS_REAL = {"reach_id": "tramo", "river_name": "rio", "x": "lon", "y": "lat", "width_x": "ancho_m", "reach_len": "longitud_m",
+                "n_chan_mod": "canales", "ERate": "erosion_m_anio", "ERate_max": "erosion_max_m_anio", "ARate": "acrecion_m_anio",
+                "ARate_max": "acrecion_max_m_anio", "FalseERate": "ruido_erosion_m_anio", "FalseARate": "ruido_acrecion_m_anio",
+                "bestYear1": "anio_inicial", "bestYear2": "anio_final"}
+
+
+def erosion_real(clave_bbox: str = "bbox_regional", bufer_grados: float = 0.2, forzar: bool = False) -> gpd.GeoDataFrame:
+    """Tasas de erosión y acreción de orillas por tramo de río (REAL; Langhorst y Pavelsky, 2023), en m/año.
+
+    Descarga solo la tabla de atributos del shapefile (~130 MB), que trae el centro de cada tramo de SWORD en grados,
+    y la recorta a la extensión ampliada con `bufer_grados`. Las tasas comparan los dos años con mejor clasificación
+    de agua de Landsat; los tramos sin estimación (islas y cauces múltiples) quedan con NaN.
+    """
+    b = bbox(clave_bbox, bufer_grados)
+
+    def _bajar():
+        import pyogrio
+
+        dbf = descargar(f"{url('erosion_real')}/REAL_reach.dbf?download=1", dir_datos() / "raw" / "REAL_reach.dbf")
+        df = pyogrio.read_dataframe(dbf, read_geometry=False, columns=[c for c in _CAMPOS_REAL if c not in ("x", "y")] + ["x", "y"],
+                                    where=f"x >= {b[0]} AND x <= {b[2]} AND y >= {b[1]} AND y <= {b[3]}")
+        df = df.rename(columns=_CAMPOS_REAL)[list(_CAMPOS_REAL.values())]
+        tasas = [c for c in df.columns if c.endswith("_m_anio")]
+        df[tasas] = df[tasas].where(df[tasas] >= 0)   # valores negativos = tramo sin estimación
+        df["rio"] = df["rio"].replace("NODATA", None)
+        return gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df["lon"], df["lat"]), crs=4326)
+
+    return cache(f"real_{clave_bbox}_{bufer_grados:g}.parquet", _bajar, forzar)
+
+
+# ------------------------------------------------------------------ Salud (OpenDengue)
+def _sin_tildes(texto: str) -> str:
+    import unicodedata
+
+    return "".join(c for c in unicodedata.normalize("NFD", texto) if unicodedata.category(c) != "Mn").upper()
+
+
+def dengue_opendengue(municipio: str | None = None, departamento: str | None = None, forzar: bool = False) -> pd.Series:
+    """Casos semanales de dengue notificados al SIVIGILA en un municipio, según OpenDengue (Clarke et al., 2024).
+
+    OpenDengue solo publica las semanas con casos notificados, así que las semanas sin registro entre el primer
+    y el último dato se cuentan como cero. El índice es la fecha de inicio de la semana epidemiológica.
+    """
+    municipio = _sin_tildes(municipio or aoi_cfg()["municipio"])
+    departamento = _sin_tildes(departamento or aoi_cfg()["departamento"])
+
+    def _bajar():
+        import zipfile
+
+        z = descargar(url("dengue_opendengue"), dir_datos() / "raw" / Path(url("dengue_opendengue")).name)
+        columnas = ["adm_0_name", "adm_1_name", "adm_2_name", "calendar_start_date", "dengue_total", "T_res", "S_res"]
+        partes = []
+        with zipfile.ZipFile(z) as zf:
+            nombre = next(n for n in zf.namelist() if n.endswith(".csv"))
+            with zf.open(nombre) as f:
+                for trozo in pd.read_csv(f, usecols=columnas, chunksize=500_000, low_memory=False):
+                    partes.append(trozo[(trozo.adm_0_name == "COLOMBIA") & (trozo.adm_1_name == departamento)
+                                        & (trozo.adm_2_name == municipio) & (trozo.T_res == "Week") & (trozo.S_res == "Admin2")])
+        df = pd.concat(partes)
+        s = df.groupby(pd.to_datetime(df["calendar_start_date"]))["dengue_total"].sum()
+        semanas = pd.date_range(s.index.min(), s.index.max(), freq="7D")
+        return s.reindex(semanas, fill_value=0).rename("casos").to_frame()
+
+    df = cache(f"dengue_{municipio.lower()}.csv", _bajar, forzar)
+    return df.iloc[:, 0] if isinstance(df, pd.DataFrame) else df
+
+
 # ------------------------------------------------------------------ Planetary Computer (STAC)
 def catalogo_pc():
     import planetary_computer
@@ -661,23 +779,27 @@ def raster_estatico(coleccion: str, activo: str, clave_bbox: str = "bbox_regiona
 
 # ------------------------------------------------------------------ FIRMS
 def focos_calor(sensor: str = "modis", anios: list[int] | None = None, clave_bbox: str = "bbox_regional",
-                pais: str = "Colombia") -> pd.DataFrame:
+                paises: list[str] | None = None) -> pd.DataFrame:
     """Focos de calor del archivo anual por país de NASA FIRMS, recortados a la extensión.
 
-    sensor: "modis" (2001–) o "viirs-snpp" (2012–). Cada año se guarda por separado.
+    sensor: "modis" (2001–) o "viirs-snpp" (2012–). Cada año y país se guarda por separado; para una extensión que
+    cruza fronteras se pasan todos los países (p. ej. ["Colombia", "Peru", "Brazil"], con los nombres de FIRMS).
     """
     b = bbox(clave_bbox)
     anios = anios or list(range(2001 if sensor == "modis" else 2012, date.today().year))
     partes = []
-    for a in anios:
-        def _bajar(a=a):
-            u = f"{url('focos_calor')}/{sensor}/{a}/{sensor}_{a}_{pais}.csv"
-            df = pd.read_csv(io.StringIO(_get(u).text))
-            df = df[df.longitude.between(b[0], b[2]) & df.latitude.between(b[1], b[3])]
-            return df.set_index(pd.to_datetime(df["acq_date"]))
+    for pais in paises or ["Colombia"]:
+        sufijo = "" if pais == "Colombia" else f"_{pais.lower()}"
+        for a in anios:
+            def _bajar(a=a, pais=pais):
+                u = f"{url('focos_calor')}/{sensor}/{a}/{sensor}_{a}_{pais}.csv"
+                df = pd.read_csv(io.StringIO(_get(u).text))
+                df = df[df.longitude.between(b[0], b[2]) & df.latitude.between(b[1], b[3])]
+                return df.set_index(pd.to_datetime(df["acq_date"]))
 
-        try:
-            partes.append(cache(f"firms_{sensor}_{a}_{clave_bbox}.csv", _bajar))
-        except requests.HTTPError as e:
-            log.warning("FIRMS %s %s no disponible: %s", sensor, a, e)
+            try:
+                df = cache(f"firms_{sensor}_{a}_{clave_bbox}{sufijo}.csv", _bajar)
+                partes.append(df.assign(pais=pais))
+            except requests.HTTPError as e:
+                log.warning("FIRMS %s %s %s no disponible: %s", sensor, pais, a, e)
     return pd.concat(partes).sort_index() if partes else pd.DataFrame()

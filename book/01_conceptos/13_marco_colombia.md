@@ -54,7 +54,7 @@ departamento formule un **Plan Integral de Gestión del Cambio Climático Territ
   [@forbes2025navegabilidad].
 
 :::{tip} Cómo usa este libro el marco normativo
-Las medidas de la [síntesis](../03_analisis/37_sintesis.ipynb) se ordenan según los procesos de la Ley 1523
+Las medidas de la [síntesis](../03_analisis/38_sintesis.ipynb) se ordenan según los procesos de la Ley 1523
 (conocimiento, reducción y manejo) y apuntan a los instrumentos de esta página: actualizar el PMGRD, incorporar
 estudios básicos al ordenamiento y articular el PIGCCT con la gestión del riesgo.
 :::

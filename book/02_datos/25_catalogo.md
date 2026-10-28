@@ -65,6 +65,12 @@ que el recurso responde desde la nube.
   - 30 m
   - CC BY 4.0
   - 2026-10-28
+* - **Tasas de erosión y acreción de orillas por tramo de río** (`erosion_real`)
+  - global
+  - Langhorst y Pavelsky (2023) – Riverbank Erosion and Accretion from Landsat (REAL): REAL v0.1: tasas medias y máximas (m/año) por tramo de SWORD, Landsat 2000–2020 ([enlace](https://doi.org/10.5281/zenodo.7045021))
+  - tramos de ~10 km de ríos de más de 150 m de ancho
+  - CC BY 4.0
+  - 2026-10-28
 * - **Emergencias reportadas a la UNGRD (2019–presente)** (`emergencias_ungrd`)
   - nacional
   - UNGRD: Consolidado de emergencias por municipio (Datos Abiertos Colombia) ([enlace](https://www.datos.gov.co/d/wwkg-r6te))
@@ -149,6 +155,12 @@ que el recurso responde desde la nube.
   - ~28 km
   - CC BY 4.0
   - 2026-10-28
+* - **Serie horaria de temperatura, punto de rocío, humedad y viento (1979–presente) para el estrés térmico (UTCI)** (`clima_horario`)
+  - global
+  - ECMWF ERA5 (vía Open-Meteo): Reanálisis ERA5 horario, celda 0,25° ([enlace](https://open-meteo.com/en/docs/historical-weather-api))
+  - ~28 km, horaria
+  - CC BY 4.0
+  - 2026-10-28
 * - **Proyecciones CMIP6 (ensamble de modelos) de temperatura, lluvia, sequía y calor** (`proyecciones_cckp`)
   - global
   - Banco Mundial – Climate Change Knowledge Portal (CCKP): CMIP6 0,25° (reducción de escala estadística), SSP1-2.6, SSP2-4.5, SSP5-8.5 ([enlace](https://climateknowledgeportal.worldbank.org))
@@ -178,6 +190,18 @@ que el recurso responde desde la nube.
   - NOAA Climate Prediction Center: ONI (ERSSTv5), trimestres móviles 1950–presente ([enlace](https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt))
   - Pacífico ecuatorial (Niño 3.4)
   - Dominio público
+  - 2026-10-28
+* - **Índice del Atlántico Norte tropical (TNA)** (`indice_tna`)
+  - global
+  - NOAA Physical Sciences Laboratory: TNA mensual (HadISST1.1, climatología 1991–2020), 1948–presente ([enlace](https://psl.noaa.gov/data/timeseries/month/))
+  - Atlántico Norte tropical (5,5–23,5° N; 15–57,5° O)
+  - Dominio público
+  - 2026-10-28
+* - **Casos semanales de dengue notificados por municipio (2007–2022)** (`dengue_opendengue`)
+  - global
+  - OpenDengue (Clarke et al., 2024) con datos del SIVIGILA – Instituto Nacional de Salud: OpenDengue V1.3, extracto espacial (Colombia a nivel municipal, semanal) ([enlace](https://doi.org/10.6084/m9.figshare.24259573))
+  - municipal, semanal
+  - CC BY 4.0
   - 2026-10-28
 * - **Catálogo nacional de estaciones del IDEAM** (`estaciones_ideam`)
   - nacional

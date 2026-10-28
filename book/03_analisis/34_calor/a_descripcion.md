@@ -24,6 +24,7 @@ flowchart LR
   ERA[ERA5 diario 1950–2026] --> TR[Tendencia Tmax]
   ERA --> U[Umbral p90 local] --> O[Días y olas de calor]
   ERA --> TA[Temperatura aparente]
+  ERAH[ERA5 horario 1979–2025] --> UT[UTCI a la sombra:<br/>horas con estrés por calor]
   L[Landsat 8/9 jul–oct] --> LST[Temperatura de superficie y NDVI]
   LST --> B[Mapa bivariado<br/>calor × vulnerabilidad]
   E[Edificaciones y población] --> B
@@ -34,7 +35,9 @@ flowchart LR
 
 ## Datos y métodos
 
-ERA5 [@hersbach2020]; temperatura aparente de Steadman [@steadman1984]; temperatura de superficie de Landsat 8/9;
+ERA5 [@hersbach2020]; temperatura aparente de Steadman [@steadman1984]; UTCI [@brode2012utci] calculado con
+thermofeel [@brimicombe2022thermofeel], como en la climatología de estrés térmico de Suramérica de Miranda et al.
+[@miranda2023utci]; temperatura de superficie de Landsat 8/9;
 proyecciones del CCKP [@cckp2024; @thrasher2022]; umbrales relativos y olas de al menos tres días, como en CLIMAAX
 [@climaax2026handbook].
 
@@ -42,4 +45,5 @@ proyecciones del CCKP [@cckp2024; @thrasher2022]; umbrales relativos y olas de a
 
 - ERA5 representa una celda de ~28 km dominada por bosque: subestima el calor urbano.
 - La temperatura de superficie a media mañana no es la temperatura del aire, pero ordena bien los lugares.
+- El UTCI se calcula a la sombra (sin radiación de onda larga en la serie horaria): subestima el estrés al sol.
 - Sin datos de edad e ingreso por manzana, la vulnerabilidad se aproxima con densidad, población y vegetación.

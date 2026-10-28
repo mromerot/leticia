@@ -23,6 +23,10 @@ bbox_urbano: [-69.975, -4.235, -69.915, -4.150]   # lon_min, lat_min, lon_max, l
 bbox_rio: [-70.03, -4.27, -69.90, -4.16]
 # Extensión regional (río, islas y bosques del entorno) para dinámica fluvial e incendios
 bbox_regional: [-70.15, -4.32, -69.80, -4.05]
+# Triple frontera (Colombia, Perú y Brasil) para la temporada regional de incendios y humo: el fuego que llega a
+# Leticia como humo se quema sobre todo fuera del municipio
+bbox_fuego: [-71.5, -5.5, -68.5, -2.5]
+paises_fuego: ["Colombia", "Peru", "Brazil"]
 
 crs_trabajo: "EPSG:9377"     # MAGNA-SIRGAS / Origen-Nacional
 crs_export: "EPSG:4326"

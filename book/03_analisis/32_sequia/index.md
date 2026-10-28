@@ -23,6 +23,9 @@ salud.
 - El ensamble CMIP6 proyecta un SPEI-12 más seco en todos los escenarios (−0,6 hacia 2050 con SSP2-4.5; −2,0 hacia
   2090 con SSP5-8.5). En octubre de 2026 el ONI supera **+2 °C** (El Niño fuerte): señal de alerta para la vaciante
   de 2027.
+- Con el método de Santos de Lima et al. (2024), el río pasó **132 días** de 2024 por debajo de su P80 (9,53 m), el
+  periodo de aguas bajas más largo de los 8 años con registro completo; la serie pública tiene vacíos justo en aguas
+  bajas.
 
 ## Páginas del flujo
 

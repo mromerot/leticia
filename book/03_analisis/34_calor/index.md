@@ -17,6 +17,9 @@ Leticia, mapea la temperatura de superficie con Landsat y proyecta el calor con 
 - Los días con temperatura aparente ≥ 41 °C («peligro») pasaron de ~1 por año en los setenta a ~15–23 desde 2000.
 - En superficie, el centro construido es hasta **9,5 °C** más caliente que la mediana urbana y más de 10 °C más
   caliente que el bosque vecino; la vegetación explica buena parte de esa diferencia (r = −0,82).
+- Con el UTCI a la sombra (ERA5 horario, implementación del ECMWF), el **14 %** de las horas de 1979–2020 tuvo
+  estrés por calor fuerte; esas horas aumentan **~14 por año** (p = 0,001), con máximos en 2005, 2010, 2015–2016 y
+  2024 (método de Miranda et al., 2023).
 - Con SSP2-4.5 hacia 2050: Tmax **+1,2 °C**, días con índice de calor > 35 °C de ~7 a ~**92 por año**, noches con
   mínima > 26 °C de ~1 a ~54 por año, y ~115 días por año sobre el umbral actual de día caluroso.
 

@@ -20,6 +20,10 @@ hidrologia:
   umbral_creciente_cm: 1700       # ilustrativo: aguas muy altas (≈ percentil 95 de los máximos anuales)
   umbral_estiaje_cm: 600          # ilustrativo: aguas muy bajas que dificultan la navegación de carga
   umbral_estiaje_critico_cm: 400  # ilustrativo: aislamiento del puerto (2024 bajó a ~2,2 m)
+  # Aguas bajas según Santos de Lima et al. (2024): nivel igualado o superado el 80 % del tiempo (P80 de la curva de
+  # duración), contado por año hidrológico de diciembre a noviembre
+  excedencia_aguas_bajas: 80
+  mes_inicio_anio_hidrologico: 12
 
 inundacion:
   periodos_jrc: [10, 20, 50, 100, 200, 500]
@@ -41,6 +45,8 @@ calor:
   dias_minimos_ola: 3
   # Categorías de índice de calor (NOAA/NWS), °C
   indice_calor_categorias: {precaucion: 27, precaucion_extrema: 32, peligro: 41, peligro_extremo: 54}
+  # Umbral inferior (°C) de cada categoría de estrés por calor del UTCI (Bröde et al., 2012)
+  utci_categorias: {moderado: 26, fuerte: 32, muy_fuerte: 38, extremo: 46}
   meses_landsat: [7, 8, 9, 10]    # temporada menos nubosa en Leticia
   nubes_max: 60
 
@@ -48,10 +54,25 @@ incendios:
   confianza_modis_min: 50
   confianza_viirs: ["n", "h"]
   bufer_interfaz_m: 500           # franja de interfaz urbano-forestal
+  # Pronóstico estacional (Fernandes et al., 2011): focos de la temporada frente a la TSM del Atlántico Norte tropical.
+  # En la triple frontera la temporada se corre un mes respecto a la de Fernandes (julio–septiembre): agosto–octubre
+  # concentra ~80 % de los focos MODIS.
+  meses_temporada: [8, 9, 10]
+  meses_predictor: [3, 4, 5]      # TNA de marzo–mayo: se conoce a comienzos de junio, dos meses antes de la temporada
+  anio_inicio_modis: 2003         # primer año completo con Terra y Aqua (el archivo de 2001–2002 está incompleto)
 
 lluvias:
   umbral_lluvia_fuerte_mm: 50
   umbral_racha_kmh: 50
+
+dengue:
+  rezagos_meses: [1, 3, 6]        # horizontes de pronóstico de Beal et al. (2025)
+  # Respuesta térmica de la transmisión por Aedes aegypti a temperatura constante (Mordecai et al., 2017), °C:
+  # pico en 29,1 °C, sin transmisión por debajo de 17,8 °C y por encima de 34,6 °C; máxima entre 26 y 29 °C
+  temperatura_optima: 29.1
+  temperatura_limite_inferior: 17.8
+  temperatura_limite_superior: 34.6
+  rango_transmision_maxima: [26, 29]
 
 vulnerabilidad:
   # Pesos del índice de vulnerabilidad de la malla (suman 1). Ilustrativos.

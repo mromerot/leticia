@@ -21,6 +21,9 @@ GloFAS y los mapas globales de inundación del JRC, y la cruza con las edificaci
 - Si la creciente de 100 años sube 0,5 m o 1 m, la población expuesta aumenta **22 % y 56 %**.
 - En octubre de 2026 el pronóstico de GloFAS anticipa una subida del río **por debajo de lo normal**, coherente con
   El Niño en curso.
+- Frente a la regla de Leticia, GloFAS reproduce bien el ciclo anual (Spearman diario **0,87**) pero adelanta el pico
+  de la creciente ~**4 semanas** y ordena mal la magnitud de cada año (Spearman de los máximos 0,49): su pronóstico
+  indica la tendencia, no el nivel máximo (método adaptado de Towner et al., 2019).
 
 ## Páginas del flujo
 

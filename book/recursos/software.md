@@ -33,7 +33,7 @@ El libro se construye con software libre:
 myst.yml, index.md           configuración y portada del libro
 book/01_conceptos/           Sección 1: conceptos, contexto, evidencia y perfil de riesgos
 book/02_datos/               Sección 2: fuentes de datos, catálogo y área de estudio
-book/03_analisis/            Sección 3: seis flujos (a–d) y síntesis
+book/03_analisis/            Sección 3: siete flujos (a–d) y síntesis
 book/recursos/               Colab, glosario, software, preguntas frecuentes, cómo citar
 src/leticia/                 paquete de Python
 src/leticia/config/          aoi.yaml, sources.yaml, parametros.yaml

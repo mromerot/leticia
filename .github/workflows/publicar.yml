@@ -26,6 +26,13 @@ jobs:
           node-version: "20"
       - name: Instalar MyST
         run: npm install -g mystmd
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Salidas Markdown de los cuadernos a HTML (el tema web de MyST no las interpreta)
+        run: |
+          pip install markdown
+          python recursos_web/salidas_markdown_a_html.py book
       - name: Construir el sitio
         run: myst build --html
       - name: Fijar la URL pública en sitemap y robots

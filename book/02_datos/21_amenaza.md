@@ -35,11 +35,21 @@ El conjunto **Global Surface Water** clasifica cada píxel Landsat de 30 m como 
 su **ocurrencia**, **estacionalidad** y **transiciones** [@pekel2016]. Se usa para ver las zonas que se inundan con
 frecuencia y la migración del cauce.
 
+## Erosión y acreción de orillas (REAL)
+
+El conjunto **Riverbank Erosion and Accretion from Landsat** (REAL) estima la tasa media y máxima de erosión y de
+acreción de la orilla (m/año) de cada tramo de unos 10 km de los ríos de más de 150 m de ancho, a partir de hasta 20
+años de clasificaciones de agua de Landsat, con una estimación del ruido de cada tasa [@langhorst2023real;
+@langhorst2022realdata]. El paquete descarga solo la tabla de atributos del shapefile (~130 MB) y la recorta a la
+extensión regional; los tramos con islas y cauces múltiples no tienen estimación.
+
 ## Focos de calor (NASA FIRMS) y pérdida de bosque (Hansen)
 
 Los focos de calor activos de **MODIS** (1 km, 2001–) y **VIIRS** (375 m, 2012–) se descargan del archivo anual por
-país de FIRMS [@giglio2016; @schroeder2014]. La **pérdida anual de cobertura arbórea** (2001–2024) proviene de Global
-Forest Change v1.12 [@hansen2013].
+país de FIRMS [@giglio2016; @schroeder2014]. Para el pronóstico de la temporada se unen los archivos de Colombia, Perú
+y Brasil en la triple frontera, porque el humo que llega a Leticia se quema sobre todo fuera del municipio. Los fuegos
+pequeños escapan a estos sensores, así que los conteos son un mínimo [@randerson2012]. La **pérdida anual de
+cobertura arbórea** (2001–2024) proviene de Global Forest Change v1.12 [@hansen2013].
 
 ## Registros de desastres (DesInventar y UNGRD) y tamizaje (ThinkHazard)
 

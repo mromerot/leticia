@@ -140,3 +140,64 @@ def relacion_nivel_caudal(nivel: pd.Series, caudal: pd.Series, grado: int = 2):
     pred = np.polyval(coef, df["caudal"])
     r2 = 1 - ((df["nivel"] - pred) ** 2).sum() / ((df["nivel"] - df["nivel"].mean()) ** 2).sum()
     return coef, float(r2), df
+
+
+def dias_bajo_referencia(s: pd.Series, excedencia: float = 80, mes_inicio: int = 12, cobertura_min: float = 0.8,
+                         base: tuple[int, int] | None = None) -> tuple[pd.DataFrame, float]:
+    """Días por año hidrológico con el nivel por debajo del P80 de la curva de duración (Santos de Lima et al., 2024).
+
+    El P80 es el nivel igualado o superado el 80 % del tiempo, es decir, el percentil 20 de los niveles diarios. Como
+    a la serie le faltan sobre todo días de aguas bajas, cada dato pesa 1/(datos de su día del año): así la curva de
+    duración representa por igual todas las épocas del año. El año hidrológico empieza en `mes_inicio` (diciembre) y
+    se nombra por el año en que termina. Devuelve, por año, los días bajo el umbral, la cobertura de la temporada de
+    aguas bajas y si el año está completo (cobertura ≥ `cobertura_min`); en los incompletos el conteo es un mínimo.
+    """
+    meses = parametros()["hidrologia"]["temporada_bajas"]
+    s = s.dropna()
+    ref = s if base is None else s[(s.index.year >= base[0]) & (s.index.year <= base[1])]
+    doy = np.minimum(np.asarray(ref.index.dayofyear), 365)
+    peso = 1 / pd.Series(doy).map(pd.Series(doy).value_counts()).to_numpy()
+    orden = np.argsort(ref.to_numpy())
+    acumulado = np.cumsum(peso[orden]) / peso.sum()
+    umbral = float(ref.to_numpy()[orden][np.searchsorted(acumulado, 1 - excedencia / 100)])
+    anio = s.index.year + ((s.index.month >= mes_inicio) & (mes_inicio > 1)).astype(int)
+    dias_temporada = pd.Series(pd.date_range("2001-01-01", "2001-12-31")).dt.month.isin(meses).sum()
+    out = pd.DataFrame({"dias_bajo": (s < umbral).groupby(anio).sum(),
+                        "cobertura": pd.Series(s.index.month.isin(meses), index=s.index).groupby(anio).sum() / dias_temporada})
+    out["completo"] = out["cobertura"] >= cobertura_min
+    return out.rename_axis("anio_hidrologico"), umbral
+
+
+def comparar_simulacion(obs: pd.Series, sim: pd.Series, percentil_evento: float = 95, desfase_max: int = 30) -> tuple[dict, pd.DataFrame]:
+    """Compara una serie diaria simulada (p. ej., caudal de GloFAS) con una observada de otra magnitud (nivel).
+
+    Como la relación nivel–caudal es monótona, usa medidas de rango y de calendario en lugar del KGE, que exige
+    caudal observado: correlación de Spearman diaria y de los máximos anuales, desfase que maximiza la correlación,
+    error en la fecha del pico anual, correlación de los máximos y de los mínimos anuales y detección de los días
+    sobre el percentil `percentil_evento` de cada serie (después de corregir el desfase).
+    Devuelve un resumen y una tabla por año con las fechas de los picos.
+    """
+    df = pd.concat({"obs": obs, "sim": sim}, axis=1).dropna()
+    rho = float(stats.spearmanr(df["obs"], df["sim"])[0])
+    desfases = {d: stats.spearmanr(*pd.concat([obs, sim.shift(d)], axis=1).dropna().T.values)[0] for d in range(-desfase_max, desfase_max + 1)}
+    mejor = max(desfases, key=desfases.get)
+    meses = parametros()["hidrologia"]["temporada_altas"]
+    alta = df[df.index.month.isin(meses)]
+    g = alta.groupby(alta.index.year)
+    anual = pd.DataFrame({"pico_obs": g["obs"].idxmax(), "pico_sim": g["sim"].idxmax(), "max_obs": g["obs"].max(),
+                          "max_sim": g["sim"].max(), "dias": g.size()})
+    anual = anual[anual["dias"] >= parametros()["hidrologia"]["dias_min_temporada"]]
+    anual["error_dias"] = (anual["pico_sim"] - anual["pico_obs"]).dt.days
+    baja = df[df.index.month.isin(parametros()["hidrologia"]["temporada_bajas"])]
+    gb = baja.groupby(baja.index.year)
+    minimos = pd.DataFrame({"obs": gb["obs"].min(), "sim": gb["sim"].min()})[gb.size() >= parametros()["hidrologia"]["dias_min_temporada"]]
+    dfd = pd.concat({"obs": obs, "sim": sim.shift(mejor)}, axis=1).dropna()   # eventos con el desfase corregido
+    ev_obs = dfd["obs"] > np.percentile(dfd["obs"], percentil_evento)
+    ev_sim = dfd["sim"] > np.percentile(dfd["sim"], percentil_evento)
+    aciertos, fallas, falsas = int((ev_obs & ev_sim).sum()), int((ev_obs & ~ev_sim).sum()), int((~ev_obs & ev_sim).sum())
+    resumen = {"dias_comunes": len(df), "spearman_diario": rho, "desfase_optimo_dias": int(mejor), "spearman_desfase": float(desfases[mejor]),
+               "spearman_maximos_anuales": float(stats.spearmanr(anual["max_obs"], anual["max_sim"])[0]), "anios": len(anual),
+               "spearman_minimos_anuales": float(stats.spearmanr(minimos["obs"], minimos["sim"])[0]), "anios_minimos": len(minimos),
+               "error_pico_mediano_dias": float(anual["error_dias"].median()), "error_pico_absoluto_dias": float(anual["error_dias"].abs().median()),
+               "probabilidad_deteccion": aciertos / max(aciertos + fallas, 1), "razon_falsas_alarmas": falsas / max(aciertos + falsas, 1)}
+    return resumen, anual

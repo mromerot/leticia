@@ -19,6 +19,9 @@ y evalúa la exposición de las viviendas de la interfaz urbano-forestal.
 - **308 edificaciones** (~860 personas) están a la vez en la interfaz con vegetación continua y a menos de 500 m de un
   foco de calor reciente.
 - El humo de los incendios regionales, sobre todo de Brasil y Perú, es un riesgo para toda la ciudad en las sequías.
+- En la triple frontera (Colombia, Perú y Brasil) el 82 % de los focos MODIS ocurre en agosto–octubre. El índice del
+  Atlántico Norte tropical de marzo–mayo anticipa la temporada con habilidad **modesta** (0,12 en validación
+  cruzada); los años con más focos (2005, 2010, 2024) tuvieron un Atlántico cálido (método de Fernandes et al., 2011).
 
 ## Páginas del flujo
 

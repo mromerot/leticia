@@ -7,7 +7,9 @@ short_title: 2.3 Clima
 
 La serie diaria de temperatura máxima y mínima, temperatura aparente, humedad, punto de rocío, lluvia, viento,
 rachas y evapotranspiración de referencia proviene del reanálisis **ERA5** del ECMWF (1950–presente, celda de
-0,25°) [@hersbach2020], consultado con la API histórica de Open-Meteo [@zippenfenig2023openmeteo].
+0,25°) [@hersbach2020], consultado con la API histórica de Open-Meteo [@zippenfenig2023openmeteo]. Para el estrés
+térmico (UTCI) se usa la serie **horaria** de temperatura, punto de rocío, humedad y viento desde 1979, de la misma
+fuente.
 
 :::{important} Limitaciones de ERA5 en Leticia
 Una celda de ~28 km dominada por bosque y río **subestima** el calor de la ciudad construida, la lluvia de los

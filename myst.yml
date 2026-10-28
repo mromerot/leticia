@@ -2,7 +2,7 @@ version: 1
 project:
   title: Leticia — riesgos de desastres y climáticos
   subtitle: Análisis reproducible para Leticia (Amazonas, Colombia) con la estructura de SIDRo
-  description: Libro reproducible en cuadernos de Colab sobre los riesgos de desastres y climáticos de Leticia, Amazonas — inundación, sequía y estiaje, erosión fluvial, calor, incendios, lluvias intensas y vendavales.
+  description: Libro reproducible en cuadernos de Colab sobre los riesgos de desastres y climáticos de Leticia, Amazonas — inundación, sequía y estiaje, erosión fluvial, calor, incendios, lluvias intensas y vendavales, y dengue.
   keywords: [riesgo de desastres, riesgo climático, Leticia, Amazonas, Amazonía, río Amazonas, MyST, Colab, CCDR, CLIMAAX]
   authors:
     - name: Mauricio Romero
@@ -27,6 +27,7 @@ project:
         - file: book/01_conceptos/15_contexto_leticia.md
         - file: book/01_conceptos/16_evidencia.md
         - file: book/01_conceptos/17_perfil_riesgos.ipynb
+        - file: book/01_conceptos/18_revision_literatura.md
     - file: book/02_datos/index.md
       children:
         - file: book/02_datos/21_amenaza.md
@@ -49,7 +50,9 @@ project:
           children: [{pattern: "book/03_analisis/35_incendios/?_*.*"}]
         - file: book/03_analisis/36_lluvias_vendavales/index.md
           children: [{pattern: "book/03_analisis/36_lluvias_vendavales/?_*.*"}]
-        - file: book/03_analisis/37_sintesis.ipynb
+        - file: book/03_analisis/37_dengue/index.md
+          children: [{pattern: "book/03_analisis/37_dengue/?_*.*"}]
+        - file: book/03_analisis/38_sintesis.ipynb
     - title: Recursos
       children:
         - file: book/recursos/colab.md

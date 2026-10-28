@@ -42,7 +42,7 @@ Todos los análisis de este libro son **cuadernos de Jupyter** (`.ipynb`) que se
   - 2–6 min cada uno (usan la malla de 2.6, que se crea sola si falta)
 * - 3.x *d. Escenarios*
   - 2–8 min cada uno (lectura remota de las proyecciones del CCKP)
-* - [3.7 Síntesis](../03_analisis/37_sintesis.ipynb)
+* - [3.8 Síntesis](../03_analisis/38_sintesis.ipynb)
   - 5–10 min si se ejecuta sola
 ```
 

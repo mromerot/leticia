@@ -20,6 +20,9 @@ al río.
 - Las bajadas más rápidas del río (hasta 7,7 m en 30 días) ocurrieron en 1997, 2026 y 2018; son los momentos de
   mayor riesgo de socavación de barrancos.
 - Descontado el efecto del nivel, el agua frente a la ciudad disminuye ~1,5 ha por año (indicio con cuatro fechas).
+- Según REAL (Langhorst y Pavelsky, 2023), la orilla del cauce principal cerca de Leticia retrocede **2–15 m/año**
+  (hasta diez veces la mediana mundial), con máximos de más de 35 m/año; junto a la ciudad la acreción supera a la
+  erosión, como en la sedimentación del brazo colombiano descrita por Villadiego-Rojas et al. (2023).
 
 ## Páginas del flujo
 

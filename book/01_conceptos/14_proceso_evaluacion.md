@@ -22,13 +22,13 @@ El manual CLIMAAX organiza la evaluación del riesgo climático en cinco pasos [
 * - 1. Alcance
   - [1.5 Leticia: el territorio](15_contexto_leticia.md) y [2.6 Área de estudio](../02_datos/26_area_estudio.ipynb)
 * - 2. Exploración
-  - [1.6 Revisión de la evidencia](16_evidencia.md) y [1.7 Perfil de riesgos](17_perfil_riesgos.ipynb), con la
-    matriz de priorización
+  - [1.6 Revisión de la evidencia](16_evidencia.md), [1.7 Perfil de riesgos](17_perfil_riesgos.ipynb), con la
+    matriz de priorización, y [1.8 Flujos de la literatura](18_revision_literatura.md)
 * - 3. Análisis
-  - Seis flujos de la [Sección 3](../03_analisis/index.md), cada uno con las páginas a (descripción), b (amenaza),
+  - Siete flujos de la [Sección 3](../03_analisis/index.md), cada uno con las páginas a (descripción), b (amenaza),
     c (riesgo) y d (escenarios)
 * - 4. Riesgos clave
-  - [3.7 Síntesis multiamenaza](../03_analisis/37_sintesis.ipynb)
+  - [3.8 Síntesis multiamenaza](../03_analisis/38_sintesis.ipynb)
 * - 5. Seguimiento
   - Cuadernos reproducibles en Colab que se pueden volver a ejecutar cada año con datos nuevos
 ```

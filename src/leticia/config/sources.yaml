@@ -122,6 +122,19 @@ capas:
     licencia: "CC BY 4.0"
     verificado: "2026-10-28"
 
+  erosion_real:
+    seccion: "2.1"
+    tema: "Tasas de erosión y acreción de orillas por tramo de río"
+    nivel: global
+    tipo: http
+    url: "https://zenodo.org/records/7045021/files"
+    entidad: "Langhorst y Pavelsky (2023) – Riverbank Erosion and Accretion from Landsat (REAL)"
+    producto: "REAL v0.1: tasas medias y máximas (m/año) por tramo de SWORD, Landsat 2000–2020"
+    escala: "tramos de ~10 km de ríos de más de 150 m de ancho"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://doi.org/10.5281/zenodo.7045021"
+    verificado: "2026-10-28"
+
   emergencias_ungrd:
     seccion: "2.1"
     tema: "Emergencias reportadas a la UNGRD (2019–presente)"
@@ -251,6 +264,19 @@ capas:
     url_ficha: "https://open-meteo.com/en/docs/historical-weather-api"
     verificado: "2026-10-28"
 
+  clima_horario:
+    seccion: "2.3"
+    tema: "Serie horaria de temperatura, punto de rocío, humedad y viento (1979–presente) para el estrés térmico (UTCI)"
+    nivel: global
+    tipo: openmeteo
+    url: "https://archive-api.open-meteo.com/v1/archive"
+    entidad: "ECMWF ERA5 (vía Open-Meteo)"
+    producto: "Reanálisis ERA5 horario, celda 0,25°"
+    escala: "~28 km, horaria"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://open-meteo.com/en/docs/historical-weather-api"
+    verificado: "2026-10-28"
+
   proyecciones_cckp:
     seccion: "2.3"
     tema: "Proyecciones CMIP6 (ensamble de modelos) de temperatura, lluvia, sequía y calor"
@@ -275,6 +301,32 @@ capas:
     producto: "ONI (ERSSTv5), trimestres móviles 1950–presente"
     escala: "Pacífico ecuatorial (Niño 3.4)"
     licencia: "Dominio público"
+    verificado: "2026-10-28"
+
+  indice_tna:
+    seccion: "2.4"
+    tema: "Índice del Atlántico Norte tropical (TNA)"
+    nivel: global
+    tipo: http
+    url: "https://psl.noaa.gov/data/correlation/tna.data"
+    entidad: "NOAA Physical Sciences Laboratory"
+    producto: "TNA mensual (HadISST1.1, climatología 1991–2020), 1948–presente"
+    escala: "Atlántico Norte tropical (5,5–23,5° N; 15–57,5° O)"
+    licencia: "Dominio público"
+    url_ficha: "https://psl.noaa.gov/data/timeseries/month/"
+    verificado: "2026-10-28"
+
+  dengue_opendengue:
+    seccion: "2.4"
+    tema: "Casos semanales de dengue notificados por municipio (2007–2022)"
+    nivel: global
+    tipo: http
+    url: "https://raw.githubusercontent.com/OpenDengue/master-repo/main/data/releases/V1.3/Spatial_extract_V1_3.zip"
+    entidad: "OpenDengue (Clarke et al., 2024) con datos del SIVIGILA – Instituto Nacional de Salud"
+    producto: "OpenDengue V1.3, extracto espacial (Colombia a nivel municipal, semanal)"
+    escala: "municipal, semanal"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://doi.org/10.6084/m9.figshare.24259573"
     verificado: "2026-10-28"
 
   estaciones_ideam:
