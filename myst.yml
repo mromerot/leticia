@@ -1,0 +1,64 @@
+version: 1
+project:
+  title: Leticia — riesgos de desastres y climáticos
+  subtitle: Análisis reproducible para Leticia (Amazonas, Colombia) con la estructura de SIDRo
+  description: Libro reproducible en cuadernos de Colab sobre los riesgos de desastres y climáticos de Leticia, Amazonas — inundación, sequía y estiaje, erosión fluvial, calor, incendios, lluvias intensas y vendavales.
+  keywords: [riesgo de desastres, riesgo climático, Leticia, Amazonas, Amazonía, río Amazonas, MyST, Colab, CCDR, CLIMAAX]
+  authors:
+    - name: Mauricio Romero
+      orcid: 0000-0003-3282-0372
+  license:
+    content: CC-BY-4.0
+    code: MIT
+  github: mromerot/leticia
+  bibliography: [references.bib]
+  jupyter: false
+  settings:
+    output_matplotlib_strings: remove
+  exclude: [README.md, "data/**", "_build/**"]
+  toc:
+    - file: index.md
+    - file: book/01_conceptos/index.md
+      children:
+        - file: book/01_conceptos/11_marco_riesgo.md
+        - file: book/01_conceptos/12_riesgo_climatico.md
+        - file: book/01_conceptos/13_marco_colombia.md
+        - file: book/01_conceptos/14_proceso_evaluacion.md
+        - file: book/01_conceptos/15_contexto_leticia.md
+        - file: book/01_conceptos/16_evidencia.md
+        - file: book/01_conceptos/17_perfil_riesgos.ipynb
+    - file: book/02_datos/index.md
+      children:
+        - file: book/02_datos/21_amenaza.md
+        - file: book/02_datos/22_exposicion.md
+        - file: book/02_datos/23_clima.md
+        - file: book/02_datos/24_otros.md
+        - file: book/02_datos/25_catalogo.md
+        - file: book/02_datos/26_area_estudio.ipynb
+    - file: book/03_analisis/index.md
+      children:
+        - file: book/03_analisis/31_inundacion/index.md
+          children: [{pattern: "book/03_analisis/31_inundacion/?_*.*"}]
+        - file: book/03_analisis/32_sequia/index.md
+          children: [{pattern: "book/03_analisis/32_sequia/?_*.*"}]
+        - file: book/03_analisis/33_erosion/index.md
+          children: [{pattern: "book/03_analisis/33_erosion/?_*.*"}]
+        - file: book/03_analisis/34_calor/index.md
+          children: [{pattern: "book/03_analisis/34_calor/?_*.*"}]
+        - file: book/03_analisis/35_incendios/index.md
+          children: [{pattern: "book/03_analisis/35_incendios/?_*.*"}]
+        - file: book/03_analisis/36_lluvias_vendavales/index.md
+          children: [{pattern: "book/03_analisis/36_lluvias_vendavales/?_*.*"}]
+        - file: book/03_analisis/37_sintesis.ipynb
+    - title: Recursos
+      children:
+        - file: book/recursos/colab.md
+        - file: book/recursos/glosario.md
+        - file: book/recursos/software.md
+        - file: book/recursos/faq.md
+        - file: book/recursos/citar.md
+site:
+  template: book-theme
+  options:
+    folders: true
+    logo_text: Leticia · riesgos

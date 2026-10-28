@@ -1,0 +1,12 @@
+# Datos descargados y procesados (se regeneran desde los cuadernos)
+data/
+# Construcción del libro
+_build/
+# Python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store

@@ -1,0 +1,40 @@
+name: Publicar el libro
+
+# Los cuadernos se ejecutan con datos reales (en Colab o en la nube) y sus salidas viajan en los .ipynb.
+# Aquí solo se construye el HTML con MyST y se publica en GitHub Pages (rama gh-pages).
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construir-y-publicar:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: /leticia
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Instalar MyST
+        run: npm install -g mystmd
+      - name: Construir el sitio
+        run: myst build --html
+      - name: Fijar la URL pública en sitemap y robots
+        run: |
+          sed -i "s#http://localhost:3000#https://mromerot.github.io/leticia#g" _build/html/sitemap.xml _build/html/robots.txt || true
+          touch _build/html/.nojekyll
+      - name: Publicar en la rama gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/html
+          force_orphan: true

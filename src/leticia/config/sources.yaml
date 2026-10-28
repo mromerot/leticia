@@ -1,0 +1,290 @@
+# ------------------------------------------------------------------
+# Catálogo de fuentes del proyecto Leticia.
+# Cada capa declara su sección del libro, su nivel (local -> nacional -> global),
+# la entidad responsable y la URL base. Los cuadernos solo llaman funciones de
+# `leticia.fuentes`, que leen estas URL; la página 2.5 se genera desde aquí.
+# verificado: fecha en que se comprobó que el recurso responde desde la nube.
+# ------------------------------------------------------------------
+capas:
+
+  # ============================ 2.1 AMENAZA ============================
+  nivel_rio_leticia:
+    seccion: "2.1"
+    tema: "Nivel diario del río Amazonas en Leticia (medio, mínimo y máximo)"
+    nivel: nacional
+    tipo: ideam_s3
+    url: "https://datos.ideam.gov.co/s3-estacionesideam/observaciones/historicos/csv"
+    entidad: "IDEAM"
+    producto: "Estación limnimétrica LETICIA [48017010], series NV_MEDIA_D, NV_MN_D y NV_MX_D"
+    escala: "puntual, diaria, 1987–presente"
+    licencia: "Datos abiertos (Ley 1712 de 2014)"
+    url_ficha: "https://www.datos.gov.co/d/9fxi-fthb"
+    verificado: "2026-10-28"
+
+  caudal_glofas:
+    seccion: "2.1"
+    tema: "Caudal diario simulado del Amazonas (reanálisis y pronóstico)"
+    nivel: global
+    tipo: openmeteo_flood
+    url: "https://flood-api.open-meteo.com/v1/flood"
+    entidad: "Copernicus EMS – GloFAS v4 (vía Open-Meteo)"
+    producto: "river_discharge diario 1984–presente, celda 0,05°"
+    escala: "~5 km"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://open-meteo.com/en/docs/flood-api"
+    verificado: "2026-10-28"
+
+  inundacion_jrc:
+    seccion: "2.1"
+    tema: "Mapas globales de amenaza por inundación fluvial (profundidad por periodo de retorno)"
+    nivel: global
+    tipo: http_raster
+    url: "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/CEMS-GLOFAS/flood_hazard"
+    entidad: "JRC – Copernicus EMS (GloFAS)"
+    producto: "Global river flood hazard maps v2.1 (RP10–RP500), LISFLOOD-FP"
+    escala: "3 arcsec (~90 m)"
+    licencia: "ODbL 1.0"
+    verificado: "2026-10-28"
+
+  agua_superficial_jrc:
+    seccion: "2.1"
+    tema: "Agua superficial 1984–2021: ocurrencia, estacionalidad y transiciones"
+    nivel: global
+    tipo: stac
+    url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+    coleccion: "jrc-gsw"
+    entidad: "JRC – Global Surface Water (Pekel et al. 2016)"
+    producto: "occurrence, seasonality, transitions, extent"
+    escala: "30 m"
+    licencia: "Uso libre con atribución"
+    verificado: "2026-10-28"
+
+  landsat:
+    seccion: "2.1"
+    tema: "Imágenes Landsat 5/7/8/9 (agua, orillas y temperatura de superficie)"
+    nivel: global
+    tipo: stac
+    url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+    coleccion: "landsat-c2-l2"
+    entidad: "USGS / NASA (Microsoft Planetary Computer)"
+    producto: "Landsat Collection 2 Level-2 (reflectancia y temperatura de superficie)"
+    escala: "30 m"
+    licencia: "Dominio público"
+    verificado: "2026-10-28"
+
+  sentinel2:
+    seccion: "2.4"
+    tema: "Mosaico Sentinel-2 en color verdadero (mapa base)"
+    nivel: global
+    tipo: stac
+    url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+    coleccion: "sentinel-2-l2a"
+    entidad: "ESA Copernicus (Microsoft Planetary Computer)"
+    producto: "Sentinel-2 L2A"
+    escala: "10 m"
+    licencia: "Copernicus (libre)"
+    verificado: "2026-10-28"
+
+  focos_calor:
+    seccion: "2.1"
+    tema: "Focos de calor activos (incendios detectados por satélite)"
+    nivel: global
+    tipo: http
+    url: "https://firms.modaps.eosdis.nasa.gov/data/country"
+    entidad: "NASA FIRMS"
+    producto: "Archivo anual por país, MODIS (1 km, 2001–) y VIIRS S-NPP (375 m, 2012–)"
+    escala: "375 m – 1 km"
+    licencia: "Uso libre con atribución (NASA)"
+    verificado: "2026-10-28"
+
+  area_quemada:
+    seccion: "2.1"
+    tema: "Área quemada mensual"
+    nivel: global
+    tipo: stac
+    url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+    coleccion: "modis-64A1-061"
+    entidad: "NASA MODIS (Microsoft Planetary Computer)"
+    producto: "MCD64A1 v6.1"
+    escala: "500 m"
+    licencia: "Dominio público"
+    verificado: "2026-10-28"
+
+  perdida_bosque:
+    seccion: "2.1"
+    tema: "Pérdida anual de cobertura arbórea"
+    nivel: global
+    tipo: http_raster
+    url: "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12"
+    entidad: "Hansen et al. / University of Maryland – Global Forest Change"
+    producto: "GFC v1.12 (2001–2024): treecover2000, lossyear"
+    escala: "30 m"
+    licencia: "CC BY 4.0"
+    verificado: "2026-10-28"
+
+  emergencias_ungrd:
+    seccion: "2.1"
+    tema: "Emergencias reportadas a la UNGRD (2019–presente)"
+    nivel: nacional
+    tipo: socrata
+    url: "https://www.datos.gov.co/resource"
+    conjuntos: ["wwkg-r6te", "4t8v-ywmw", "rgre-6ak4", "2343-nuqp"]
+    entidad: "UNGRD"
+    producto: "Consolidado de emergencias por municipio (Datos Abiertos Colombia)"
+    escala: "municipal, por evento"
+    licencia: "Datos abiertos"
+    url_ficha: "https://www.datos.gov.co/d/wwkg-r6te"
+    verificado: "2026-10-28"
+
+  desinventar:
+    seccion: "2.1"
+    tema: "Inventario histórico de desastres (1914–presente)"
+    nivel: nacional
+    tipo: http
+    url: "https://www.desinventar.net/DesInventar/download/DI_export_col.zip"
+    entidad: "DesInventar Sendai (Corporación OSSO / UNDRR) con registros de la UNGRD"
+    producto: "Exportación nacional de Colombia (fichas por municipio)"
+    escala: "municipal, por evento"
+    licencia: "Uso libre con atribución"
+    url_ficha: "https://www.desinventar.net"
+    verificado: "2026-10-28"
+
+  thinkhazard:
+    seccion: "2.1"
+    tema: "Nivel de amenaza por tipo (tamizaje global)"
+    nivel: global
+    tipo: http
+    url: "https://thinkhazard.org/en/report/13336-colombia-amazonas-leticia.json"
+    entidad: "GFDRR – Banco Mundial"
+    producto: "ThinkHazard! (Leticia, código 13336)"
+    escala: "municipal"
+    licencia: "CC BY 4.0 (verificar por amenaza)"
+    verificado: "2026-10-28"
+
+  # ========================= 2.2 EXPOSICIÓN Y VULNERABILIDAD ========================
+  limite_municipal:
+    seccion: "2.2"
+    tema: "Límite municipal de Leticia"
+    nivel: nacional
+    tipo: http
+    url: "https://www.geoboundaries.org/api/current/gbOpen/COL/ADM2/"
+    entidad: "DANE (vía geoBoundaries)"
+    producto: "Marco Geoestadístico Nacional, nivel municipal (2020)"
+    escala: "1:100.000 (simplificado)"
+    licencia: "CC BY 4.0"
+    verificado: "2026-10-28"
+
+  edificaciones:
+    seccion: "2.2"
+    tema: "Huellas de edificaciones"
+    nivel: global
+    tipo: http
+    url: "https://minedbuildings.z5.web.core.windows.net/global-buildings/dataset-links.csv"
+    entidad: "Microsoft – Global ML Building Footprints"
+    producto: "Huellas derivadas de imágenes (2014–2024), particionadas por quadkey"
+    escala: "edificación"
+    licencia: "ODbL"
+    verificado: "2026-10-28"
+
+  poblacion:
+    seccion: "2.2"
+    tema: "Población en hexágonos H3 de 400 m"
+    nivel: global
+    tipo: http
+    url: "https://geodata-eu-central-1-kontur-public.s3.amazonaws.com/kontur_datasets/kontur_population_CO_20231101.gpkg.gz"
+    entidad: "Kontur (GHSL, Facebook HRSL, Microsoft Buildings, Copernicus)"
+    producto: "Kontur Population Colombia 2023-11-01"
+    escala: "H3 resolución 8 (~0,7 km²)"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://data.humdata.org/dataset/kontur-population-colombia"
+    verificado: "2026-10-28"
+
+  cobertura_suelo:
+    seccion: "2.2"
+    tema: "Cobertura del suelo (incluye área construida y bosque)"
+    nivel: global
+    tipo: stac
+    url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+    coleccion: "esa-worldcover"
+    entidad: "ESA WorldCover"
+    producto: "WorldCover 10 m 2021 v200"
+    escala: "10 m"
+    licencia: "CC BY 4.0"
+    verificado: "2026-10-28"
+
+  elevacion:
+    seccion: "2.2"
+    tema: "Modelo digital de superficie"
+    nivel: global
+    tipo: stac
+    url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+    coleccion: "cop-dem-glo-30"
+    entidad: "Copernicus DEM GLO-30"
+    producto: "DSM 30 m (TanDEM-X 2011–2015)"
+    escala: "30 m"
+    licencia: "Copernicus DEM (libre con atribución)"
+    verificado: "2026-10-28"
+
+  lugares_clave:
+    seccion: "2.2"
+    tema: "Infraestructura crítica (hospital, aeropuerto, puerto, acueducto)"
+    nivel: global
+    tipo: http
+    url: "https://nominatim.openstreetmap.org/search"
+    entidad: "OpenStreetMap (Nominatim)"
+    producto: "Geocodificación de lugares con nombre"
+    escala: "punto"
+    licencia: "ODbL"
+    verificado: "2026-10-28"
+
+  # ============================ 2.3 CLIMA ============================
+  clima_diario:
+    seccion: "2.3"
+    tema: "Serie diaria de temperatura, humedad, lluvia y viento (1950–presente)"
+    nivel: global
+    tipo: openmeteo
+    url: "https://archive-api.open-meteo.com/v1/archive"
+    entidad: "ECMWF ERA5 (vía Open-Meteo)"
+    producto: "Reanálisis ERA5, celda 0,25°"
+    escala: "~28 km"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://open-meteo.com/en/docs/historical-weather-api"
+    verificado: "2026-10-28"
+
+  proyecciones_cckp:
+    seccion: "2.3"
+    tema: "Proyecciones CMIP6 (ensamble de modelos) de temperatura, lluvia, sequía y calor"
+    nivel: global
+    tipo: netcdf_remoto
+    url: "https://wbg-cckp.s3.amazonaws.com/data/cmip6-x0.25"
+    entidad: "Banco Mundial – Climate Change Knowledge Portal (CCKP)"
+    producto: "CMIP6 0,25° (reducción de escala estadística), SSP1-2.6, SSP2-4.5, SSP5-8.5"
+    escala: "0,25°"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://climateknowledgeportal.worldbank.org"
+    verificado: "2026-10-28"
+
+  # ============================ 2.4 OTROS ============================
+  indices_oceanicos:
+    seccion: "2.4"
+    tema: "Índice Oceánico El Niño (ONI)"
+    nivel: global
+    tipo: http
+    url: "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt"
+    entidad: "NOAA Climate Prediction Center"
+    producto: "ONI (ERSSTv5), trimestres móviles 1950–presente"
+    escala: "Pacífico ecuatorial (Niño 3.4)"
+    licencia: "Dominio público"
+    verificado: "2026-10-28"
+
+  estaciones_ideam:
+    seccion: "2.4"
+    tema: "Catálogo nacional de estaciones del IDEAM"
+    nivel: nacional
+    tipo: socrata
+    url: "https://www.datos.gov.co/resource/hp9r-jxuu.json"
+    entidad: "IDEAM"
+    producto: "Catálogo Nacional de Estaciones"
+    escala: "punto"
+    licencia: "Datos abiertos"
+    verificado: "2026-10-28"

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Si usa este libro o su código, cítelo así."
+title: "Leticia — riesgos de desastres y climáticos: análisis reproducible para Leticia (Amazonas, Colombia) con la estructura de SIDRo"
+authors:
+  - family-names: Romero
+    given-names: Mauricio
+    orcid: "https://orcid.org/0000-0003-3282-0372"
+date-released: 2026-10-28
+url: "https://mromerot.github.io/leticia/"
+repository-code: "https://github.com/mromerot/leticia"
+license: MIT
+keywords: [riesgo de desastres, riesgo climático, Leticia, Amazonas, Amazonía]

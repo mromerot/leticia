@@ -1,0 +1,62 @@
+# ------------------------------------------------------------------
+# Parámetros de los análisis. Los valores marcados "ilustrativo" no son
+# oficiales: sirven para que el flujo corra y deben reemplazarse por los
+# umbrales de alerta del IDEAM, la Capitanía de Puerto o la Alcaldía.
+# ------------------------------------------------------------------
+
+periodos_retorno: [2, 5, 10, 25, 50, 100]
+
+hidrologia:
+  # Control de calidad de la serie de nivel (cm)
+  nivel_min_valido_cm: 100        # valores por debajo se consideran error de registro (p. ej. ceros)
+  salto_max_cm_dia: 120           # cambio máximo plausible frente a la mediana móvil de 15 días
+  # Periodos con un desplazamiento evidente del cero de la regla (no corregido en la serie publicada):
+  # de febrero a diciembre de 2007 el nivel quedó ~5–7 m por debajo de su climatología todos los meses.
+  periodos_excluidos: [["2007-01-01", "2007-12-31"]]
+  dias_min_temporada: 45          # días con dato que exige la temporada de aguas altas o bajas para usar el año
+  temporada_altas: [2, 3, 4, 5, 6]    # meses de aguas altas en Leticia
+  temporada_bajas: [8, 9, 10, 11]     # meses de aguas bajas
+  # Umbrales de referencia en la regla de Leticia (cm). Ilustrativos: el IDEAM y la Capitanía usan sus propios niveles.
+  umbral_creciente_cm: 1700       # ilustrativo: aguas muy altas (≈ percentil 95 de los máximos anuales)
+  umbral_estiaje_cm: 600          # ilustrativo: aguas muy bajas que dificultan la navegación de carga
+  umbral_estiaje_critico_cm: 400  # ilustrativo: aislamiento del puerto (2024 bajó a ~2,2 m)
+
+inundacion:
+  periodos_jrc: [10, 20, 50, 100, 200, 500]
+  profundidad_minima_m: 0.15      # profundidad a partir de la cual una edificación se cuenta como expuesta
+  # Curva de daño por profundidad para vivienda (Huizinga et al. 2017, Suramérica, residencial). Fracción de daño.
+  curva_danio:
+    profundidad_m: [0.0, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0, 6.0]
+    fraccion:      [0.0, 0.49, 0.71, 0.84, 0.93, 0.98, 1.0, 1.0, 1.0]
+  costo_reposicion_cop_m2: 1500000   # ilustrativo: vivienda de un piso en madera/mampostería (COP 2025)
+
+erosion:
+  anios_comparacion: [1987, 2001, 2013, 2024]  # años de aguas bajas para comparar el cauce
+  meses_aguas_bajas: [8, 9, 10, 11]
+  umbral_mndwi: 0.0
+  franja_orilla_m: 150            # franja de exposición a la socavación detrás de la orilla
+
+calor:
+  percentil_umbral: 90
+  dias_minimos_ola: 3
+  # Categorías de índice de calor (NOAA/NWS), °C
+  indice_calor_categorias: {precaucion: 27, precaucion_extrema: 32, peligro: 41, peligro_extremo: 54}
+  meses_landsat: [7, 8, 9, 10]    # temporada menos nubosa en Leticia
+  nubes_max: 60
+
+incendios:
+  confianza_modis_min: 50
+  confianza_viirs: ["n", "h"]
+  bufer_interfaz_m: 500           # franja de interfaz urbano-forestal
+
+lluvias:
+  umbral_lluvia_fuerte_mm: 50
+  umbral_racha_kmh: 50
+
+vulnerabilidad:
+  # Pesos del índice de vulnerabilidad de la malla (suman 1). Ilustrativos.
+  pesos:
+    densidad_edificaciones: 0.30
+    poblacion: 0.30
+    proximidad_rio: 0.20
+    baja_vegetacion: 0.20

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leticia"
+version = "0.1.0"
+description = "Análisis reproducible de riesgos de desastres y climáticos de Leticia (Amazonas, Colombia), con la estructura de SIDRo"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Mauricio Romero" }]
+dependencies = [
+  "geopandas>=0.14", "shapely>=2.0", "pyproj", "pyarrow", "rasterio", "rioxarray", "xarray",
+  "numpy", "pandas", "scipy", "pyyaml", "requests", "matplotlib", "mapclassify", "netCDF4",
+  "pystac-client", "planetary-computer", "odc-stac", "scikit-image",
+]
+
+[project.optional-dependencies]
+libro = ["jupyter", "ipykernel", "nbclient", "nbformat"]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+leticia = ["config/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 160
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]

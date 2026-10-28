@@ -1,0 +1,35 @@
+# ------------------------------------------------------------------
+# Área de interés (AOI) — archivo que cambia para replicar el proyecto
+# en otra ciudad ribereña de la Amazonía colombiana.
+# ------------------------------------------------------------------
+nombre: "Leticia"
+municipio: "Leticia"
+departamento: "Amazonas"
+codigo_divipola: "91001"
+pais: "COL"
+slug: "leticia"
+
+# Punto de referencia (centro de la cabecera) y punto sobre el río Amazonas
+centro: {lat: -4.2125, lon: -69.9406}
+estacion_nivel: {codigo: "0048017010", nombre: "Leticia", lat: -4.2225, lon: -69.9427}
+# Celda de GloFAS sobre el cauce principal del Amazonas aguas arriba de Leticia (caudal medio ~38 000 m³/s).
+punto_glofas: {lat: -4.21, lon: -70.00}
+
+# Extensión del área urbana de análisis (cabecera y periferia sobre la vía a Tarapacá).
+# Se recorta con el límite municipal, de modo que Tabatinga (Brasil) queda fuera del análisis,
+# aunque aparece en los mapas como contexto.
+bbox_urbano: [-69.975, -4.235, -69.915, -4.150]   # lon_min, lat_min, lon_max, lat_max
+# Tramo del río frente a Leticia (islas Santa Rosa y Rondiña, brazo colombiano) para la dinámica del cauce
+bbox_rio: [-70.03, -4.27, -69.90, -4.16]
+# Extensión regional (río, islas y bosques del entorno) para dinámica fluvial e incendios
+bbox_regional: [-70.15, -4.32, -69.80, -4.05]
+
+crs_trabajo: "EPSG:9377"     # MAGNA-SIRGAS / Origen-Nacional
+crs_export: "EPSG:4326"
+tamano_celda_m: 200          # malla de análisis (celdas cuadradas)
+
+clima:
+  periodo_base: [1991, 2020]
+  escenarios: ["ssp126", "ssp245", "ssp585"]
+  periodos_futuros: ["2040-2059", "2080-2099"]
+  percentiles: ["p10", "median", "p90"]
