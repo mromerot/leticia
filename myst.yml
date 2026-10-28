@@ -15,7 +15,7 @@ project:
   jupyter: false
   settings:
     output_matplotlib_strings: remove
-  exclude: [README.md, "data/**", "_build/**"]
+  exclude: [README.md, "data/**", "_build/**", "recursos_web/**"]
   toc:
     - file: index.md
     - file: book/01_conceptos/index.md

@@ -32,6 +32,7 @@ jobs:
         run: |
           sed -i "s#http://localhost:3000#https://mromerot.github.io/leticia#g" _build/html/sitemap.xml _build/html/robots.txt || true
           touch _build/html/.nojekyll
+          cp recursos_web/404.html _build/html/404.html
       - name: Publicar en la rama gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
