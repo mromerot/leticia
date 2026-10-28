@@ -46,22 +46,34 @@ def ruta(nombre: str) -> Path:
     return dir_datos() / "processed" / nombre
 
 
-def _get(u: str, params: dict | None = None, intentos: int = 5, **kw) -> requests.Response:
-    """GET con reintentos y espera exponencial (las API públicas limitan la tasa de consultas)."""
+def _get(u: str, params: dict | None = None, intentos: int = 8, **kw) -> requests.Response:
+    """GET con reintentos y espera exponencial (las API públicas limitan la tasa de consultas).
+
+    Ante un HTTP 429 (límite de consultas, frecuente en Open-Meteo desde IP compartidas) respeta la cabecera
+    Retry-After y espera hasta 90 s entre intentos; en total puede esperar unos 5 minutos antes de fallar.
+    """
     espera = 3
+    tiempo = kw.pop("timeout", TIEMPO)
     for i in range(intentos):
         try:
-            r = SESION.get(u, params=params, timeout=kw.pop("timeout", TIEMPO), **kw)
+            r = SESION.get(u, params=params, timeout=tiempo, **kw)
             if r.status_code in (429, 500, 502, 503, 504):
                 raise requests.HTTPError(f"HTTP {r.status_code}", response=r)
             r.raise_for_status()
             return r
         except (requests.ConnectionError, requests.Timeout, requests.HTTPError) as e:
-            if i == intentos - 1:
+            resp = getattr(e, "response", None)
+            if i == intentos - 1 or (resp is not None and resp.status_code not in (429, 500, 502, 503, 504)):
                 raise
-            log.info("reintento %d de %s (%s)", i + 1, u, e)
-            time.sleep(espera)
-            espera *= 2
+            pausa = espera
+            if resp is not None and resp.status_code == 429:
+                try:
+                    pausa = max(pausa, float(resp.headers.get("Retry-After", 0)))
+                except ValueError:
+                    pass
+            log.info("reintento %d de %s en %.0f s (%s)", i + 1, u, pausa, e)
+            time.sleep(min(pausa, 90))
+            espera = min(espera * 2, 90)
     raise RuntimeError("inalcanzable")
 
 
