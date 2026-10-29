@@ -97,3 +97,92 @@ representa [@amadio2024ccdr]. Cuando no hay función de daño se reporta la **ex
 Para comparar amenazas dentro de la ciudad, cada flujo transforma sus indicadores en rangos percentiles (0–1), los
 agrupa en cinco clases (muy baja a muy alta) y las cruza en una matriz amenaza × vulnerabilidad. Son clases
 **relativas a Leticia**, útiles para priorizar, no categorías absolutas como las de un estudio de amenaza oficial.
+
+(conceptos-medidas)=
+## Reducción del riesgo, mitigación y adaptación
+
+Las medidas de las páginas *e* de cada flujo de la sección 3 usan tres conceptos que se cruzan y que conviene
+distinguir. El más delicado es **mitigación**, que significa cosas distintas en la gestión del riesgo de desastres
+y en la política de cambio climático.
+
+```{list-table} Tres conceptos en la norma colombiana (texto literal) y cómo se usan en este libro
+:header-rows: 1
+:label: tabla-conceptos-medidas
+* - Concepto
+  - Definición normativa
+  - Uso en este libro
+* - **Reducción del riesgo**
+  - «Es el proceso de la gestión del riesgo, está compuesto por la intervención dirigida a modificar o disminuir las
+    condiciones de riesgo existentes, entiéndase: mitigación del riesgo y a evitar nuevo riesgo en el territorio,
+    entiéndase: prevención del riesgo. […] La reducción del riesgo la componen la intervención correctiva del riesgo
+    existente, la intervención prospectiva de nuevo riesgo y la protección financiera» (Ley 1523, art. 4, num. 21,
+    modificado por la Ley 2474 de 2025) [@ley1523; @ley2474].
+  - Es el proceso que agrupa las medidas de **prevención**, **mitigación del riesgo** y **protección financiera**.
+* - **Mitigación del riesgo**
+  - «Medidas de intervención prescriptiva o correctiva dirigidas a reducir o disminuir los daños y pérdidas que se
+    puedan presentar a través de reglamentos de seguridad y proyectos de inversión pública o privada cuyo objetivo es
+    reducir las condiciones de amenaza, cuando sea posible, y la vulnerabilidad existente» (Ley 1523, art. 4, num. 16).
+  - Medidas que reducen el **riesgo que ya existe**: reforzar, elevar o reubicar lo expuesto, o reducir la amenaza.
+* - **Prevención del riesgo**
+  - «Medidas y acciones de intervención restrictiva o prospectiva dispuestas con anticipación con el fin de evitar que
+    se genere riesgo. […] Los instrumentos esenciales de la prevención son aquellos previstos en la planificación, la
+    inversión pública y el ordenamiento ambiental territorial» (Ley 1523, art. 4, num. 18).
+  - Medidas que **evitan riesgo nuevo**: sobre todo, el ordenamiento del territorio y las normas de construcción.
+* - **Protección financiera**
+  - «Mecanismos o instrumentos financieros de retención intencional o transferencia del riesgo que se establecen en
+    forma ex ante con el fin de acceder de manera ex post a recursos económicos oportunos para la atención de
+    emergencias y la recuperación» (Ley 1523, art. 4, num. 19).
+  - Fondos, reservas y seguros que pagan la respuesta y la recuperación.
+* - **Adaptación**
+  - «Comprende el ajuste de los sistemas naturales o humanos a los estímulos climáticos actuales o esperados o a sus
+    efectos, con el fin de moderar perjuicios o explotar oportunidades beneficiosas. En el caso de los eventos
+    hidrometeorológicos la Adaptación al Cambio Climático corresponde a la gestión del riesgo de desastres en la
+    medida en que está encaminada a la reducción de la vulnerabilidad o al mejoramiento de la resiliencia en
+    respuesta a los cambios observados o esperados del clima y su variabilidad» (Ley 1523, art. 4, num. 1). La Ley 1931
+    la define como «el proceso de ajuste a los efectos presentes y esperados del cambio climático» (art. 3, num. 2)
+    [@ley1931].
+  - Una medida es de adaptación cuando responde al **clima que cambia**: a las tendencias observadas en las
+    secciones *b* y a los escenarios de las secciones *d*.
+* - **Mitigación del cambio climático**
+  - «Es la gestión que busca reducir los niveles de emisiones de gases de efecto invernadero en la atmósfera a través
+    de la limitación o disminución de las fuentes de emisiones de gases de efecto invernadero y el aumento o mejora de
+    los sumideros y reservas de gases de efecto invernadero» (Ley 1931, art. 3, num. 11).
+  - No reduce el riesgo local de inmediato, pero muchas medidas de Leticia la producen como **cobeneficio**: frenar
+    la deforestación reduce a la vez el fuego, el calor y las emisiones.
+```
+
+La misma palabra, entonces, nombra dos cosas. En la Ley 1523, **mitigación del riesgo** es reducir las pérdidas
+posibles por una amenaza: elevar una vivienda, reubicarla, reforzar una orilla. En la Ley 1931 y en el IPCC,
+**mitigación** es reducir las emisiones de gases de efecto invernadero o aumentar sus sumideros; lo que la gestión
+del riesgo llama mitigación, el IPCC lo llama casi siempre **adaptación** [@ipcc2022wg2]. La terminología de la
+UNDRR hace la misma advertencia [@undrr_terminologia]. En este libro se escribe siempre «mitigación del riesgo» o
+«mitigación del cambio climático» para no confundirlas.
+
+Los conceptos también se solapan. Para las amenazas hidrometeorológicas, que son casi todas las de Leticia, la Ley
+1523 asimila la adaptación a la gestión del riesgo cuando reduce la vulnerabilidad o mejora la resiliencia: una
+misma medida puede ser **prevención o mitigación del riesgo** y, a la vez, **adaptación** si responde al clima que
+cambia.
+
+```{mermaid}
+flowchart TB
+  GR["Gestión del riesgo de desastres<br/>(Ley 1523)"] --> CO["Conocimiento del riesgo"]
+  GR --> RE["Reducción del riesgo"]
+  GR --> MA["Manejo de desastres<br/>(preparación, alerta, respuesta)"]
+  RE --> PR["Prevención<br/>intervención prospectiva:<br/>evitar riesgo nuevo"]
+  RE --> MI["Mitigación del riesgo<br/>intervención correctiva:<br/>reducir el riesgo existente"]
+  RE --> PF["Protección financiera"]
+  AD["Adaptación al cambio climático<br/>(Ley 1931, IPCC)"] -. "coincide si reduce vulnerabilidad<br/>ante eventos hidrometeorológicos" .- PR
+  AD -. coincide .- MI
+  AD -. "alerta temprana" .- MA
+  MCC["Mitigación del cambio climático<br/>(reducir emisiones, aumentar sumideros)"] -. "cobeneficios: bosque,<br/>arbolado urbano" .- PR
+```
+
+Las páginas *e* clasifican cada medida así:
+
+- **Tipo según la Ley 1523**: prevención (intervención prospectiva), mitigación del riesgo (intervención
+  correctiva) o protección financiera. Se incluyen también medidas de **preparación** (proceso de manejo), como la
+  alerta temprana, porque son de las opciones de adaptación más eficaces, y de **conocimiento**, cuando son la
+  condición para que las demás funcionen.
+- **Componente**: qué reduce la medida, la amenaza, la exposición o la vulnerabilidad.
+- **Adaptación**: si responde a un cambio del clima observado o proyectado en el flujo.
+- **Mitigación del cambio climático**: si además reduce emisiones o aumenta sumideros.

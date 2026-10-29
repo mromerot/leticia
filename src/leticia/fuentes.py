@@ -617,6 +617,39 @@ def lugares_clave(consultas: dict[str, str] | None = None, forzar: bool = False)
     return cache("lugares_clave.parquet", _bajar, forzar)
 
 
+def nombres_lugares(puntos: gpd.GeoDataFrame, zooms: tuple[int, ...] = (14, 15)) -> pd.Series:
+    """Nombre del poblado de OpenStreetMap (village, hamlet, town o locality) junto a cada punto, con Nominatim inverso.
+
+    Prueba los niveles de zoom en orden hasta encontrar un nombre; devuelve vacío si OpenStreetMap no tiene ninguno.
+    Las respuestas se guardan en `data/processed/nominatim_inverso.json` para no repetir consultas (Nominatim admite
+    una por segundo).
+    """
+    p = ruta("nominatim_inverso.json")
+    previo = leer(p) if p.exists() else {}
+    u = url("lugares_clave").rsplit("/", 1)[0] + "/reverse"
+    claves_nombre = ("village", "hamlet", "town", "locality", "isolated_dwelling")
+    nombres = []
+    for g in puntos.to_crs(4326).geometry:
+        nombre = ""
+        for zoom in zooms:
+            clave = f"{g.y:.4f},{g.x:.4f},{zoom}"
+            if clave not in previo:
+                try:
+                    d = _get(u, params={"lat": g.y, "lon": g.x, "zoom": zoom, "format": "jsonv2", "accept-language": "es"}, intentos=3).json()
+                    a = d.get("address", {})
+                    previo[clave] = next((a[k] for k in claves_nombre if a.get(k)), "")
+                except requests.RequestException as e:
+                    log.warning("Nominatim inverso no respondió: %s", e)
+                    previo[clave] = None
+                time.sleep(1.1)
+            nombre = previo[clave] or ""
+            if nombre:
+                break
+        nombres.append(nombre)
+    guardar({k: v for k, v in previo.items() if v is not None}, p)
+    return pd.Series(nombres, index=puntos.index, name="nombre")
+
+
 # ------------------------------------------------------------------ rásteres remotos
 def _leer_ventana(urls: list[str], b: tuple, nodata=None):
     """Lee la ventana `b` de una o varias teselas COG/GeoTIFF remotas y las une en un DataArray."""

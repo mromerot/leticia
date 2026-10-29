@@ -27,6 +27,7 @@ extrema con el ensamble CMIP6.
 - [b. Amenaza](b_amenaza.ipynb) [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mromerot/leticia/blob/main/book/03_analisis/36_lluvias_vendavales/b_amenaza.ipynb)
 - [c. Riesgo](c_riesgo.ipynb) [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mromerot/leticia/blob/main/book/03_analisis/36_lluvias_vendavales/c_riesgo.ipynb)
 - [d. Escenarios](d_escenarios.ipynb) [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mromerot/leticia/blob/main/book/03_analisis/36_lluvias_vendavales/d_escenarios.ipynb)
+- [e. Medidas de reducción del riesgo, mitigación y adaptación](e_medidas.md)
 
 Los cuadernos *b*, *c* y *d* se ejecutan en Google Colab con el botón de cada uno; las salidas publicadas aquí
 provienen de su ejecución en la nube con datos reales.

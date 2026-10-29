@@ -63,6 +63,20 @@ def malla_exposicion() -> gpd.GeoDataFrame:
     return cache("malla_exposicion.parquet", _crear)
 
 
+def asentamientos_rurales(clave_bbox: str = "bbox_ribera", poblacion_minima: float = 10) -> gpd.GeoDataFrame:
+    """Hexágonos de Kontur con población dentro del municipio y fuera del casco urbano, como puntos (centroides).
+
+    Aproximan las comunidades ribereñas y rurales cuando no hay una capa pública de asentamientos. La población de
+    cada hexágono se reduce a la fracción que cae dentro del municipio.
+    """
+    hexes = fuentes.poblacion(clave_bbox).to_crs(aoi.crs())
+    mun = fuentes.limite_municipal().to_crs(aoi.crs()).geometry.union_all()
+    urbana = aoi.area_urbana().geometry.iloc[0]
+    hexes["poblacion"] = hexes["population"] * hexes.geometry.intersection(mun).area / hexes.area
+    hexes = hexes[(hexes["poblacion"] >= poblacion_minima) & ~hexes.intersects(urbana)]
+    return gpd.GeoDataFrame(hexes[["h3", "poblacion"]].reset_index(drop=True), geometry=hexes.geometry.centroid.values, crs=hexes.crs)
+
+
 def resumen(m: gpd.GeoDataFrame) -> pd.Series:
     return pd.Series({"celdas": len(m), "celdas con edificaciones": int((m["n_edif"] > 0).sum()),
                       "edificaciones": int(m["n_edif"].sum()), "área construida (ha)": m["area_edif_m2"].sum() / 1e4,

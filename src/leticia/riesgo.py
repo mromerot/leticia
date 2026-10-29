@@ -70,3 +70,44 @@ def perdida_anual_esperada(perdidas: pd.Series) -> float:
     v = np.append(v, 0.0)
     orden = np.argsort(p)
     return float(np.trapezoid(v[orden], p[orden]))
+
+
+def impacto_climada(lon, lat, valores, profundidades: dict[int, np.ndarray], curva: dict,
+                    elevaciones_m: list[float] | None = None, region: np.ndarray | None = None) -> dict:
+    """Pérdida anual esperada por inundación con CLIMADA (Aznar-Siguan y Bresch, 2019) a partir de mapas por periodo de retorno.
+
+    Cada mapa de profundidad (`profundidades`, {periodo: profundidad en cada punto}) es un evento con frecuencia
+    1/T menos la del periodo siguiente, como se hace con los mapas del JRC; el daño sigue la curva
+    profundidad–daño `curva` ({"profundidad_m": [...], "fraccion": [...]}). Con `elevaciones_m` evalúa la medida de
+    elevar las edificaciones marcadas en `region` (1 = se eleva) esos metros. Requiere el paquete `climada`.
+    """
+    from scipy import sparse
+    from climada.engine import ImpactCalc
+    from climada.entity import Exposures, ImpactFunc, ImpactFuncSet
+    from climada.entity.measures import Measure
+    from climada.hazard import Centroids, Hazard
+
+    rps = sorted(profundidades)
+    prof = np.vstack([np.nan_to_num(np.asarray(profundidades[r], dtype=float)) for r in rps])
+    frecuencia = np.array([1 / r - (1 / rps[i + 1] if i + 1 < len(rps) else 0) for i, r in enumerate(rps)])
+    amenaza = Hazard(haz_type="RF", units="m", centroids=Centroids(lat=np.asarray(lat), lon=np.asarray(lon)),
+                     event_id=np.arange(1, len(rps) + 1), event_name=[f"T{r}" for r in rps], frequency=frecuencia,
+                     intensity=sparse.csr_matrix(prof), fraction=sparse.csr_matrix((prof > 0).astype(float)))
+    amenaza.check()
+    funcion = ImpactFunc(haz_type="RF", id=1, intensity=np.asarray(curva["profundidad_m"], dtype=float),
+                         mdd=np.asarray(curva["fraccion"], dtype=float), paa=np.ones(len(curva["fraccion"])), intensity_unit="m")
+    funciones = ImpactFuncSet([funcion])
+    expo = Exposures(pd.DataFrame({"latitude": np.asarray(lat), "longitude": np.asarray(lon), "value": np.asarray(valores, dtype=float),
+                                   "impf_RF": 1, "region_id": np.ones(len(lon), dtype=int) if region is None else np.asarray(region, dtype=int)}))
+    expo.assign_centroids(amenaza, threshold=1)
+    imp = ImpactCalc(expo, funciones, amenaza).impact(save_mat=False)
+    curva_exc = imp.calc_freq_curve(rps)
+    out = {"pae": float(imp.aai_agg), "por_periodo": pd.Series(curva_exc.impact, index=curva_exc.return_per),
+           "pae_por_punto": np.asarray(imp.eai_exp)}
+    filas = []
+    for h in elevaciones_m or []:
+        medida = Measure(name=f"elevar {h:g} m", haz_type="RF", hazard_inten_imp=(1, -h), exp_region_id=[1])
+        imp_m, _ = medida.calc_impact(expo, funciones, amenaza)
+        filas.append({"medida": medida.name, "pae": float(imp_m.aai_agg), "reduccion_%": 100 * (1 - imp_m.aai_agg / imp.aai_agg)})
+    out["medidas"] = pd.DataFrame(filas).set_index("medida") if filas else pd.DataFrame()
+    return out

@@ -208,5 +208,31 @@ def distancia_a(celdas: gpd.GeoDataFrame, objetivo: gpd.GeoDataFrame) -> pd.Seri
     return celdas.geometry.centroid.distance(g)
 
 
+def cauce_principal(agua: xr.DataArray) -> xr.DataArray:
+    """Conserva solo el cuerpo de agua conectado más grande (el río y lo que se comunica con él en ese momento)."""
+    m = np.asarray(agua.fillna(0).values).astype(bool)
+    etiquetas, n = ndimage.label(m)
+    if n > 1:
+        tam = np.bincount(etiquetas.ravel())
+        tam[0] = 0
+        m = etiquetas == tam.argmax()
+    return xr.DataArray(m, coords={"y": agua.y, "x": agua.x}, dims=("y", "x"))
+
+
+def distancia_a_cauce(agua: xr.DataArray, puntos: gpd.GeoDataFrame) -> np.ndarray:
+    """Distancia (m) en línea recta de cada punto al cauce principal conectado de una máscara de agua en EPSG:4326.
+
+    Es la medida de Santos de Lima et al. (2024): la distancia de cada asentamiento al cuerpo de agua navegable más
+    cercano, que crece en aguas bajas cuando los brazos y lagos se desconectan del río.
+    """
+    cauce = cauce_principal(agua)
+    lat = float(agua.y.mean())
+    dx = abs(float(agua.x[1] - agua.x[0])) * 111320 * np.cos(np.radians(lat))
+    dy = abs(float(agua.y[1] - agua.y[0])) * 110574
+    dist = xr.DataArray(ndimage.distance_transform_edt(~cauce.values, sampling=(dy, dx)), coords=cauce.coords, dims=cauce.dims)
+    p = puntos.to_crs(4326).geometry
+    return dist.interp(x=("p", p.x.values), y=("p", p.y.values), method="nearest").values
+
+
 def parametro(seccion: str, clave: str):
     return parametros()[seccion][clave]

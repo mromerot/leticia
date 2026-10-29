@@ -16,7 +16,7 @@ short_title: 2.2 Exposición
   - Exposición por edificación; área construida por celda
 * - Población
   - Kontur Population (hexágonos H3 de ~0,7 km²) [@kontur2023]
-  - Población repartida entre edificaciones (método dasimétrico)
+  - Población repartida entre edificaciones (método dasimétrico); asentamientos rurales y ribereños fuera del casco urbano (3.2.c)
 * - Coberturas del suelo
   - ESA WorldCover 10 m 2021 [@zanaga2022worldcover]
   - Vegetación continua (interfaz urbano-forestal), área construida

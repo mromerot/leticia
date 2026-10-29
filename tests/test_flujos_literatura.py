@@ -111,3 +111,36 @@ def test_estres_termico_diario_cuenta_horas():
 def test_sin_tildes():
     assert _sin_tildes("Leticia") == "LETICIA"
     assert _sin_tildes("Puerto Nariño") == "PUERTO NARINO"
+
+
+def test_distancia_a_cauce_conectado():
+    import geopandas as gpd
+    import xarray as xr
+    from leticia import espacial
+
+    x = np.linspace(-70.0, -69.9, 334)
+    y = np.linspace(-4.1, -4.2, 334)
+    agua = np.zeros((334, 334), dtype=bool)
+    agua[:, 160:170] = True        # río continuo de norte a sur
+    agua[10:14, 20:24] = True      # laguna aislada (no cuenta como cauce)
+    da = xr.DataArray(agua, coords={"y": y, "x": x}, dims=("y", "x"))
+    assert espacial.cauce_principal(da).values.sum() == 334 * 10
+    pts = gpd.GeoDataFrame(geometry=gpd.points_from_xy([x[165], x[22], x[100]], [y[150], y[12], y[150]]), crs=4326)
+    d = espacial.distancia_a_cauce(da, pts)
+    paso = 0.1 / 333 * 111320 * np.cos(np.radians(4.15))
+    assert d[0] == 0
+    assert abs(d[1] - 138 * paso) < 2 * paso          # la laguna no acerca el punto al cauce
+    assert abs(d[2] - 60 * paso) < 2 * paso
+
+
+def test_impacto_climada_coincide_con_integracion_por_escalones():
+    pytest = __import__("pytest")
+    pytest.importorskip("climada")
+    from leticia import riesgo
+
+    curva = {"profundidad_m": [0, 1, 2], "fraccion": [0, 0.5, 1]}
+    prof = {10: np.array([0.0, 1.0]), 100: np.array([1.0, 2.0])}
+    res = riesgo.impacto_climada([-70.0, -69.99], [-4.2, -4.2], [100.0, 100.0], prof, curva, elevaciones_m=[1.0], region=np.array([1, 1]))
+    # escalones: T10 (frecuencia 0,1 − 0,01) con pérdida 50 y T100 (0,01) con pérdida 150
+    assert abs(res["pae"] - (0.09 * 50 + 0.01 * 150)) < 1e-6
+    assert res["medidas"].loc["elevar 1 m", "pae"] < res["pae"]

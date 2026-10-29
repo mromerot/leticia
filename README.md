@@ -9,8 +9,8 @@
 Análisis reproducible de los **riesgos de desastres y climáticos de Leticia** (Amazonas, Colombia), organizado con la
 estructura de [SIDRo](https://mromerot.github.io/SIDRo/): conceptos y evidencia, fuentes de datos y siete flujos de
 análisis (inundación fluvial, sequía y estiaje, erosión y dinámica fluvial, calor extremo, incendios y humo, lluvias
-intensas y vendavales, y dengue y clima), cada uno con descripción, amenaza, riesgo y escenarios, más una síntesis
-multiamenaza. Los métodos de la literatura científica reproducidos para Leticia se resumen en la página 1.8.
+intensas y vendavales, y dengue y clima), cada uno con descripción, amenaza, riesgo, escenarios y medidas de
+reducción del riesgo, mitigación y adaptación, más una síntesis multiamenaza. Los métodos de la literatura científica reproducidos para Leticia se resumen en la página 1.8.
 
 Todo el análisis está en **cuadernos de Jupyter compatibles con Google Colab** que descargan los datos de sus fuentes
 oficiales (IDEAM, UNGRD, DesInventar, Copernicus, NASA, Banco Mundial, Microsoft Planetary Computer) y usan el
@@ -49,7 +49,7 @@ myst start
 myst.yml, index.md        configuración y portada del libro
 book/01_conceptos/        conceptos, contexto, revisión de evidencia, perfil de riesgos (cuaderno) y flujos de la literatura
 book/02_datos/            fuentes de datos, catálogo y área de estudio (cuaderno)
-book/03_analisis/         siete flujos (a. descripción, b. amenaza, c. riesgo, d. escenarios) y síntesis
+book/03_analisis/         siete flujos (a. descripción, b. amenaza, c. riesgo, d. escenarios, e. medidas) y síntesis
 book/recursos/            Colab, glosario, software, preguntas frecuentes y cómo citar
 src/leticia/              paquete de Python (fuentes, hidro, clima, espacial, exposicion, riesgo, pronostico, salud, viz)
 src/leticia/config/       aoi.yaml, sources.yaml, parametros.yaml: todo lo específico del territorio

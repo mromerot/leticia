@@ -44,12 +44,24 @@ la cuenca en conjunto.
     ordena mal la magnitud de las crecientes de cada año (correlación de los máximos anuales 0,49); las aguas bajas
     las reproduce mejor (0,75)
   - [3.1.b, sección 6](../03_analisis/31_inundacion/b_amenaza.ipynb)
+* - 3.1 Inundación
+  - Pérdida anual esperada con CLIMADA a partir de mapas por periodo de retorno, con una medida de adaptación
+    [@aznar2019climada]
+  - 25 600 millones de COP/año, frente a 37 700 con la integración propia; elevar 0,5, 1 y 2 m las viviendas que se
+    inundan con T = 10 años reduce la pérdida 6 %, 13 % y 28 %
+  - [3.1.c, sección 2](../03_analisis/31_inundacion/c_riesgo.ipynb)
 * - 3.2 Sequía
   - Duración de las aguas bajas: días por año hidrológico bajo el P80 de la curva de duración
     [@santosdelima2024]; impactos de la sequía de 2023 [@fleischmann2025]
   - 2024 tuvo el periodo de aguas bajas más largo de los años con registro completo: 132 días bajo el P80
     (9,53 m), del orden de las peores sequías documentadas en Brasil; solo 8 años tienen la temporada completa
   - [3.2.b, sección 4](../03_analisis/32_sequia/b_amenaza.ipynb) y [3.2.c](../03_analisis/32_sequia/c_riesgo.ipynb)
+* - 3.2 Sequía
+  - Distancia de cada asentamiento al cuerpo de agua navegable en aguas altas y bajas [@santosdelima2024], con
+    hexágonos de población de Kontur y el cauce conectado (JRC GSW y Landsat 2024)
+  - La población ribereña a menos de 1 km del cauce pasa de 85 % en aguas altas a 63 % en la vaciante de 2024;
+    frente a La Palmera el río quedó a 2–3 km
+  - [3.2.c, sección 5](../03_analisis/32_sequia/c_riesgo.ipynb)
 * - 3.2 Sequía
   - Paquete `SPEI` de Python como referencia para el SPI [@vonk2026spei]
   - El SPI-3 del libro coincide con el del paquete (correlación 0,97)
@@ -83,15 +95,11 @@ la cuenca en conjunto.
 
 ## Flujos no integrados
 
-- **CLIMADA** [@aznar2019climada] permitiría calcular la pérdida anual esperada por inundación con el mapa del JRC,
-  las edificaciones y curvas de daño, con incertidumbre y medidas de adaptación. El libro ya calcula una pérdida
-  esperada simple en [3.1.c](../03_analisis/31_inundacion/c_riesgo.ipynb); CLIMADA es una extensión natural, pero
-  su instalación en Colab es pesada y se deja como trabajo futuro.
-- **Aislamiento de asentamientos.** Santos de Lima et al. también miden la distancia de cada asentamiento al río en
-  aguas altas y bajas [@santosdelima2024]. Para Leticia faltaría una capa pública de comunidades ribereñas e
-  indígenas del Trapecio Amazónico con su ubicación.
 - **Pronóstico de TSM.** Fernandes et al. usaron pronósticos de TSM de un modelo acoplado para anticipar la
-  temporada desde abril [@fernandes2011]; aquí se usa la TSM observada de marzo–mayo, que llega en junio.
+  temporada desde abril [@fernandes2011]; aquí se usa la TSM observada de marzo–mayo, que llega en junio. Los
+  pronósticos estacionales de Copernicus exigen una cuenta en su servicio de datos.
+- **Costo–beneficio con CLIMADA.** CLIMADA también compara el costo de cada medida con el riesgo evitado; falta un
+  costo de referencia de la elevación y del reasentamiento de viviendas en Leticia para hacerlo.
 
 ## Cómo repetir la búsqueda
 

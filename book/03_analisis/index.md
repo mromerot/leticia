@@ -5,12 +5,14 @@ short_title: 3. Análisis
 
 Seis flujos de trabajo, uno por amenaza priorizada en el [perfil de riesgos](../01_conceptos/17_perfil_riesgos.ipynb),
 un flujo de salud (dengue y clima) agregado a partir de la [revisión de la literatura](../01_conceptos/18_revision_literatura.md)
-y una síntesis. Como en SIDRo, cada flujo tiene cuatro páginas:
+y una síntesis. Como en SIDRo, cada flujo tiene cuatro páginas de análisis y una de medidas:
 
 - **a. Descripción**: la amenaza en Leticia, preguntas, cadena de análisis, datos y limitaciones;
 - **b. Amenaza** (cuaderno): intensidad, frecuencia y tendencias;
 - **c. Riesgo** (cuaderno): cruce con edificaciones, población y vulnerabilidad;
-- **d. Escenarios** (cuaderno): cambio climático y sensibilidad.
+- **d. Escenarios** (cuaderno): cambio climático y sensibilidad;
+- **e. Medidas**: reducción del riesgo (prevención, mitigación del riesgo y protección financiera), preparación y
+  adaptación, derivadas de los resultados del flujo (conceptos en [1.1](../01_conceptos/11_marco_riesgo.md#conceptos-medidas)).
 
 ```{list-table}
 :header-rows: 1

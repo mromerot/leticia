@@ -19,6 +19,7 @@ dependencies = [
 [project.optional-dependencies]
 libro = ["jupyter", "ipykernel", "nbclient", "nbformat"]
 dev = ["pytest", "ruff"]
+climada = ["climada>=6"]   # requiere la biblioteca GDAL del sistema (ver book/recursos/software.md)
 
 [tool.setuptools.packages.find]
 where = ["src"]

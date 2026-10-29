@@ -47,7 +47,7 @@ colombiana ni los conceptos técnicos del IDEAM y la UNGRD.
 |---|---|
 | [1. Conceptos y evidencia](book/01_conceptos/index.md) | Marco de riesgo, riesgo climático, marco normativo, proceso de evaluación, contexto de Leticia, **revisión de la evidencia** (OTCA, Panel Científico por la Amazonía, IDEAM, UNGRD), **perfil de riesgos** con datos y **flujos de trabajo de la literatura científica** |
 | [2. Fuentes de datos](book/02_datos/index.md) | Amenaza, exposición, clima, otros datos, catálogo y cuaderno del área de estudio |
-| [3. Análisis](book/03_analisis/index.md) | Siete flujos de trabajo (inundación, sequía, erosión, calor, incendios, lluvias y vendavales, y dengue), cada uno con descripción, amenaza, riesgo y escenarios, y una síntesis multiamenaza |
+| [3. Análisis](book/03_analisis/index.md) | Siete flujos de trabajo (inundación, sequía, erosión, calor, incendios, lluvias y vendavales, y dengue), cada uno con descripción, amenaza, riesgo, escenarios y medidas de reducción del riesgo y adaptación, y una síntesis multiamenaza |
 | [Recursos](book/recursos/colab.md) | Cómo ejecutar en Colab, glosario, software, preguntas frecuentes y cómo citar |
 
 ## Cómo usarlo

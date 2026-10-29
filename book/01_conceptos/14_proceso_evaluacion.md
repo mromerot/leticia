@@ -26,7 +26,7 @@ El manual CLIMAAX organiza la evaluación del riesgo climático en cinco pasos [
     matriz de priorización, y [1.8 Flujos de la literatura](18_revision_literatura.md)
 * - 3. Análisis
   - Siete flujos de la [Sección 3](../03_analisis/index.md), cada uno con las páginas a (descripción), b (amenaza),
-    c (riesgo) y d (escenarios)
+    c (riesgo), d (escenarios) y e (medidas de reducción del riesgo y adaptación)
 * - 4. Riesgos clave
   - [3.8 Síntesis multiamenaza](../03_analisis/38_sintesis.ipynb)
 * - 5. Seguimiento
