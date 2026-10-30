@@ -6,10 +6,10 @@ subtitle: "Un río que migra: erosión, sedimentación y acceso de la ciudad al 
 
 El Amazonas cambia de forma frente a Leticia: islas que crecen, brazos que se colmatan y orillas que se erosionan.
 Este flujo mide esa dinámica con imágenes Landsat de aguas bajas desde 1987 y con las transiciones del agua
-superficial del JRC, y evalúa qué edificaciones están cerca de la orilla activa y cómo cambia el acceso de la ciudad
-al río.
+superficial del JRC, y evalúa qué edificaciones están cerca de la orilla activa, cómo cambia el acceso de la ciudad
+al río y qué parte de la ciudad ocupa la planicie aluvial que el SINCHI prioriza para restaurar la ronda.
 
-**Resultados clave (ejecución del 28 de octubre de 2026 con datos reales):**
+**Resultados clave (ejecución del 30 de octubre de 2026 con datos reales):**
 
 - Entre 1987 y 2024, en el tramo del río frente a Leticia, unas **800 ha** pasaron de tierra a agua (erosión) y unas
   **1 700 ha** de agua a tierra (bancos, playas e islas). La superficie de agua en aguas bajas bajó de ~3 500 a
@@ -23,6 +23,9 @@ al río.
 - Según REAL (Langhorst y Pavelsky, 2023), la orilla del cauce principal cerca de Leticia retrocede **2–15 m/año**
   (hasta diez veces la mediana mundial), con máximos de más de 35 m/año; junto a la ciudad la acreción supera a la
   erosión, como en la sedimentación del brazo colombiano descrita por Villadiego-Rojas et al. (2023).
+- A escala 1:100.000, el SINCHI ubica **casi todo el casco urbano** (unas 5 400 edificaciones y 742 ha de tejido
+  urbano) sobre la planicie aluvial y los drenajes que prioriza para restaurar la ronda hídrica. No es una zona de
+  inundación, pero sí el espacio natural del río.
 
 ## Páginas del flujo
 

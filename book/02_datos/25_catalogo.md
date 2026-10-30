@@ -71,6 +71,18 @@ que el recurso responde desde la nube.
   - tramos de ~10 km de ríos de más de 150 m de ancho
   - CC BY 4.0
   - 2026-10-28
+* - **Puntos de calor diarios en la Amazonia colombiana (2000–presente), con figura territorial** (`siatac_puntos_calor`)
+  - nacional
+  - Instituto SINCHI – SIAT-AC (a partir de NASA FIRMS): Puntos de calor por región (histórico), MODIS y VIIRS (S-NPP, NOAA-20, NOAA-21) ([enlace](https://datos.siatac.co/datasets/sinchi::puntos-de-calor-por-región-histórico-escala-1100-000-2))
+  - 375 m – 1 km; actualización diaria
+  - CC BY 4.0
+  - 2026-10-30
+* - **Cicatrices de quema (área quemada) en la Amazonia colombiana** (`siatac_cicatrices`)
+  - nacional
+  - Instituto SINCHI – SIAT-AC: Cicatrices de quema por región (histórico), escala 1:100.000 ([enlace](https://datos.siatac.co/datasets/sinchi::cicatrices-de-quema-por-región-histórico-escala-1100-000))
+  - 1:100.000
+  - CC BY 4.0
+  - 2026-10-30
 * - **Emergencias reportadas a la UNGRD (2019–presente)** (`emergencias_ungrd`)
   - nacional
   - UNGRD: Consolidado de emergencias por municipio (Datos Abiertos Colombia) ([enlace](https://www.datos.gov.co/d/wwkg-r6te))
@@ -107,6 +119,24 @@ que el recurso responde desde la nube.
   - 1:100.000 (simplificado)
   - CC BY 4.0
   - 2026-10-28
+* - **Coberturas de la tierra (Corine Land Cover adaptada a Colombia) por año, 2002–2024** (`siatac_coberturas`)
+  - nacional
+  - Instituto SINCHI – SIAT-AC: Capa de coberturas de la tierra de la Amazonia colombiana, escala 1:100.000 (leyenda completa hasta 2022; agrupada en 2024) ([enlace](https://siatac.co/coberturas-100k/))
+  - 1:100.000
+  - CC BY 4.0 (la capa de 2023 no es dato abierto y no se usa)
+  - 2026-10-30
+* - **Áreas prioritarias de restauración en rondas hídricas (planicie aluvial y drenajes)** (`siatac_restauracion_rondas`)
+  - nacional
+  - Instituto SINCHI – SIAT-AC: Áreas prioritarias de restauración en rondas hídricas por región (2024), escala 1:100.000 ([enlace](https://datos.siatac.co/datasets/sinchi::áreas-prioritarias-de-restauración-en-rondas-hídricas-por-región-2024-escala-1100-000))
+  - 1:100.000
+  - CC BY 4.0
+  - 2026-10-30
+* - **Ecosistemas terrestres y acuáticos (aguas blancas y negras)** (`siatac_ecosistemas`)
+  - nacional
+  - Instituto SINCHI – SIAT-AC: Ecosistemas por región (2024), escala 1:100.000 ([enlace](https://datos.siatac.co/datasets/sinchi::ecosistemas-por-región-2024-escala-1100-000))
+  - 1:100.000
+  - CC BY 4.0
+  - 2026-10-30
 * - **Huellas de edificaciones** (`edificaciones`)
   - global
   - Microsoft – Global ML Building Footprints: Huellas derivadas de imágenes (2014–2024), particionadas por quadkey ([enlace](https://minedbuildings.z5.web.core.windows.net/global-buildings/dataset-links.csv))

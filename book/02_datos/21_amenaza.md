@@ -51,6 +51,21 @@ y Brasil en la triple frontera, porque el humo que llega a Leticia se quema sobr
 pequeños escapan a estos sensores, así que los conteos son un mínimo [@randerson2012]. La **pérdida anual de
 cobertura arbórea** (2001–2024) proviene de Global Forest Change v1.12 [@hansen2013].
 
+## Puntos de calor y cicatrices de quema (SINCHI, SIAT-AC)
+
+El Sistema de Información Ambiental Territorial de la Amazonia colombiana (**SIAT-AC**) del Instituto SINCHI
+publica como datos abiertos (CC BY 4.0) dos capas de fuego para la región [@sinchi2026siatac]:
+
+- **Puntos de calor diarios** desde 2000, a partir de FIRMS, con todos los niveles de confianza y los satélites
+  S-NPP, NOAA-20 y NOAA-21. Cada punto trae la figura territorial donde cae (en Leticia, resguardo indígena o área
+  sustraída de la Reserva Forestal), lo que FIRMS no ofrece. Por incluir todas las detecciones, registra cerca
+  del doble de puntos que los focos de FIRMS filtrados por confianza que usa el libro ([3.5.b](../03_analisis/35_incendios/b_amenaza.ipynb)).
+- **Cicatrices de quema** (área quemada) cartografiadas a escala 1:100.000, con la cobertura que ardió; en la extensión de
+  Leticia hay registros desde 2018.
+
+El paquete las consulta en el servicio ArcGIS REST del SIAT-AC (`fuentes.siatac`), recortadas a la extensión
+regional y en páginas de 1 000 registros.
+
 ## Registros de desastres (DesInventar y UNGRD) y tamizaje (ThinkHazard)
 
 - **DesInventar Sendai** mantiene el inventario histórico de desastres de Colombia (fichas por municipio); para

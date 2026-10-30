@@ -10,7 +10,8 @@ mientras junto a la ciudad la sedimentación supera a la erosión y el brazo col
 menos de 150 m de la orilla de aguas bajas de 2024 ([3.3.c](c_riesgo.ipynb)), y las bajadas rápidas del río (hasta
 7,7 m en 30 días), cuando colapsan los barrancos, pueden hacerse más frecuentes si el ciclo hidrológico se vuelve
 más extremo
-([3.3.d](d_escenarios.ipynb)).
+([3.3.d](d_escenarios.ipynb)). A escala 1:100.000, el SINCHI ubica casi todo el casco urbano sobre la planicie aluvial
+del Amazonas y la prioriza para restaurar la vegetación de ronda ([3.3.c](c_riesgo.ipynb)) [@sinchi2026siatac].
 
 ```{list-table} Medidas para erosión y dinámica fluvial en Leticia
 :header-rows: 1
@@ -24,6 +25,11 @@ más extremo
   - Sí: la orilla se mueve más con crecientes y vaciantes extremas
   - 83 edificaciones a menos de 150 m de la orilla de aguas bajas
   - Alcaldía (planeación), Corpoamazonia
+* - Acotar la ronda hídrica del Amazonas y de las quebradas urbanas a escala de detalle, partiendo de las áreas prioritarias de restauración del SINCHI, y restaurar su vegetación donde no hay construcciones
+  - **Prevención** · exposición y amenaza
+  - Sí · cobeneficio: la vegetación de ronda captura carbono
+  - Planicie aluvial y drenajes priorizados con 742 ha de tejido urbano y unas 5 400 edificaciones (1:100.000); la planicie no es zona de inundación, pero es el espacio natural del río
+  - Corpoamazonia, Alcaldía, SINCHI
 * - Estudios geotécnicos de los barrancos habitados y reasentamiento prioritario de las viviendas en orillas activas
   - **Mitigación del riesgo** · exposición
   - Sí

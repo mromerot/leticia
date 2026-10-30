@@ -43,7 +43,7 @@ hidrológico que se intensifica.
 * - Conservar la várzea, los humedales y los cauces de quebrada periurbanos como espacio del río: sin rellenos ni canalizaciones
   - **Prevención** · amenaza y exposición
   - Sí · cobeneficio: conserva sumideros de carbono
-  - Las zonas bajas y los fondos de quebrada son los primeros que alcanza una creciente extraordinaria (3.1.c)
+  - Las zonas bajas y los fondos de quebrada son los primeros que alcanza una creciente extraordinaria (3.1.c); el SINCHI prioriza la planicie aluvial y los drenajes para restaurar la ronda ([3.3.c](../33_erosion/c_riesgo.ipynb)) [@sinchi2026siatac]
   - Corpoamazonia, Alcaldía
 * - Reserva en el fondo municipal de gestión del riesgo dimensionada con la pérdida anual esperada; evaluar un seguro paramétrico activado por el nivel en la regla de Leticia
   - **Protección financiera**

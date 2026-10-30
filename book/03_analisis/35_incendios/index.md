@@ -5,19 +5,26 @@ subtitle: Fuego en la interfaz urbano-forestal, deforestación y humo regional
 ---
 
 El fuego en la Amazonía es inducido por las personas y se propaga con la sequía. Este flujo mide la amenaza con los
-focos de calor de NASA FIRMS (2001–2025), la pérdida de bosque de Hansen y la relación entre fuego y balance hídrico,
-y evalúa la exposición de las viviendas de la interfaz urbano-forestal.
+focos de calor de NASA FIRMS (2001–2025), los puntos de calor, las cicatrices de quema y las coberturas del SINCHI,
+la pérdida de bosque de Hansen y la relación entre fuego y balance hídrico, y evalúa la exposición de las viviendas
+de la interfaz urbano-forestal.
 
-**Resultados clave (ejecución del 28 de octubre de 2026 con datos reales):**
+**Resultados clave (ejecución del 30 de octubre de 2026 con datos reales):**
 
 - En la extensión regional del lado colombiano hubo **82 focos VIIRS** entre 2012 y 2025, con el máximo en **2024**
   (16), el año de la sequía récord; el entorno de Leticia tiene pocos focos detectables comparado con el arco de
   deforestación de Brasil (ThinkHazard: amenaza baja).
+- El SINCHI registra **197 puntos de calor** desde 2000 en la misma extensión (166 en 2012–2025, el doble que FIRMS
+  filtrado, porque incluye todas las detecciones); 166 caen en áreas sustraídas de la Reserva Forestal y 31 en
+  resguardos. Sus cicatrices de quema suman ~200 ha en 2018–2025, sobre todo en coberturas que no son bosque.
 - Los años con temporada seca más deficitaria tienen más focos (Spearman −0,54 con el SPEI-3 de octubre).
 - Entre 2001 y 2024 se perdieron ~**2 900 ha** de cobertura arbórea en la extensión regional del lado colombiano y
-  ~1 500 ha en un radio de 5 km de la ciudad; al ritmo reciente (~75 ha/año) quedarían ~5 000 ha en 2050.
+  ~1 500 ha en un radio de 5 km de la ciudad; al ritmo reciente (~75 ha/año) quedarían ~5 000 ha en 2050. Las
+  coberturas del SINCHI muestran una pérdida **neta** de bosque menor (~38 ha/año en 2002–2022), mientras crecen la
+  vegetación secundaria y el área construida, que se triplicó.
 - **308 edificaciones** (~860 personas) están a la vez en la interfaz con vegetación continua y a menos de 500 m de un
-  foco de calor reciente.
+  foco de calor reciente. Con las coberturas 1:100.000 del SINCHI la interfaz es más pequeña; las dos fuentes
+  coinciden en unas 1 500 edificaciones del borde urbano.
 - El humo de los incendios regionales, sobre todo de Brasil y Perú, es un riesgo para toda la ciudad en las sequías.
 - En la triple frontera (Colombia, Perú y Brasil) el 82 % de los focos MODIS ocurre en agosto–octubre. El índice del
   Atlántico Norte tropical de marzo–mayo anticipa la temporada con habilidad **modesta** (0,12 en validación

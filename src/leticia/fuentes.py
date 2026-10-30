@@ -778,6 +778,48 @@ def dengue_opendengue(municipio: str | None = None, departamento: str | None = N
     return df.iloc[:, 0] if isinstance(df, pd.DataFrame) else df
 
 
+# ------------------------------------------------------------------ SIAT-AC (Instituto SINCHI)
+def _epoch_a_fecha(df: pd.DataFrame) -> pd.DataFrame:
+    """Los servicios ArcGIS entregan las fechas como milisegundos desde 1970; se convierten a fecha (UTC)."""
+    for c in df.columns:
+        if any(k in c.lower() for k in ("date", "fecha", "acq_")) and pd.api.types.is_numeric_dtype(df[c]):
+            df[c] = pd.to_datetime(df[c], unit="ms", errors="coerce")
+    return df
+
+
+def siatac(capa: str, clave_bbox: str = "bbox_regional", anio: int | None = None, forzar: bool = False) -> gpd.GeoDataFrame:
+    """Capa de datos abiertos del SIAT-AC (Instituto SINCHI) recortada a la extensión, en EPSG:4326.
+
+    `capa` es la clave del catálogo (p. ej. "siatac_puntos_calor"); su `servicio` nombra el FeatureServer de la carpeta
+    MAC_DatosAbiertos y puede llevar `{anio}` (coberturas por año). La consulta se pagina porque el servidor entrega
+    a lo sumo 2 000 registros por solicitud.
+    """
+    f = fuentes()[capa]
+    servicio = f["servicio"].format(anio=anio)
+    base = f"{f['url'].rstrip('/')}/{servicio}/FeatureServer/0/query"
+    b = bbox(clave_bbox)
+    filtro = {"where": "1=1", "geometry": ",".join(map(str, b)), "geometryType": "esriGeometryEnvelope", "inSR": 4326,
+              "spatialRel": "esriSpatialRelIntersects"}
+
+    def _bajar():
+        n = _get(base, params={**filtro, "returnCountOnly": "true", "f": "json"}).json()
+        if "error" in n:
+            raise RuntimeError(f"SIAT-AC {servicio}: {n['error'].get('message')}")
+        partes, paso = [], 1000
+        for desde in range(0, n["count"], paso):
+            d = _get(base, params={**filtro, "outFields": "*", "outSR": 4326, "orderByFields": "objectid", "resultOffset": desde,
+                                   "resultRecordCount": paso, "f": "geojson"}).json()
+            if d.get("features"):
+                partes.append(gpd.GeoDataFrame.from_features(d["features"], crs=4326))
+        g = pd.concat(partes, ignore_index=True) if partes else gpd.GeoDataFrame(geometry=[], crs=4326)
+        for c in g.columns:   # la fuente escribe «Vegetaciòn»: se corrige la tilde
+            if c != "geometry" and (g[c].dtype == object or pd.api.types.is_string_dtype(g[c])):
+                g[c] = g[c].str.replace("ò", "ó", regex=False)
+        return _epoch_a_fecha(gpd.GeoDataFrame(g, geometry="geometry", crs=4326))
+
+    return cache(f"{capa}{'_' + str(anio) if anio else ''}_{clave_bbox}.parquet", _bajar, forzar)
+
+
 # ------------------------------------------------------------------ Planetary Computer (STAC)
 def catalogo_pc():
     import planetary_computer

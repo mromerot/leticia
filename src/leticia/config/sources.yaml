@@ -135,6 +135,34 @@ capas:
     url_ficha: "https://doi.org/10.5281/zenodo.7045021"
     verificado: "2026-10-28"
 
+  siatac_puntos_calor:
+    seccion: "2.1"
+    tema: "Puntos de calor diarios en la Amazonia colombiana (2000–presente), con figura territorial"
+    nivel: nacional
+    tipo: arcgis_rest
+    url: "https://gis.siatac.co/arcgis/rest/services/MAC_DatosAbiertos"
+    servicio: "Puntos_Region_100K"
+    entidad: "Instituto SINCHI – SIAT-AC (a partir de NASA FIRMS)"
+    producto: "Puntos de calor por región (histórico), MODIS y VIIRS (S-NPP, NOAA-20, NOAA-21)"
+    escala: "375 m – 1 km; actualización diaria"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://datos.siatac.co/datasets/sinchi::puntos-de-calor-por-región-histórico-escala-1100-000-2"
+    verificado: "2026-10-30"
+
+  siatac_cicatrices:
+    seccion: "2.1"
+    tema: "Cicatrices de quema (área quemada) en la Amazonia colombiana"
+    nivel: nacional
+    tipo: arcgis_rest
+    url: "https://gis.siatac.co/arcgis/rest/services/MAC_DatosAbiertos"
+    servicio: "Ciq_Region_100K"
+    entidad: "Instituto SINCHI – SIAT-AC"
+    producto: "Cicatrices de quema por región (histórico), escala 1:100.000"
+    escala: "1:100.000"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://datos.siatac.co/datasets/sinchi::cicatrices-de-quema-por-región-histórico-escala-1100-000"
+    verificado: "2026-10-30"
+
   emergencias_ungrd:
     seccion: "2.1"
     tema: "Emergencias reportadas a la UNGRD (2019–presente)"
@@ -186,6 +214,48 @@ capas:
     escala: "1:100.000 (simplificado)"
     licencia: "CC BY 4.0"
     verificado: "2026-10-28"
+
+  siatac_coberturas:
+    seccion: "2.2"
+    tema: "Coberturas de la tierra (Corine Land Cover adaptada a Colombia) por año, 2002–2024"
+    nivel: nacional
+    tipo: arcgis_rest
+    url: "https://gis.siatac.co/arcgis/rest/services/MAC_DatosAbiertos"
+    servicio: "Cob_Region_100K_{anio}"
+    entidad: "Instituto SINCHI – SIAT-AC"
+    producto: "Capa de coberturas de la tierra de la Amazonia colombiana, escala 1:100.000 (leyenda completa hasta 2022; agrupada en 2024)"
+    escala: "1:100.000"
+    licencia: "CC BY 4.0 (la capa de 2023 no es dato abierto y no se usa)"
+    url_ficha: "https://siatac.co/coberturas-100k/"
+    verificado: "2026-10-30"
+
+  siatac_restauracion_rondas:
+    seccion: "2.2"
+    tema: "Áreas prioritarias de restauración en rondas hídricas (planicie aluvial y drenajes)"
+    nivel: nacional
+    tipo: arcgis_rest
+    url: "https://gis.siatac.co/arcgis/rest/services/MAC_DatosAbiertos"
+    servicio: "Arp_Region_100K_2024"
+    entidad: "Instituto SINCHI – SIAT-AC"
+    producto: "Áreas prioritarias de restauración en rondas hídricas por región (2024), escala 1:100.000"
+    escala: "1:100.000"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://datos.siatac.co/datasets/sinchi::áreas-prioritarias-de-restauración-en-rondas-hídricas-por-región-2024-escala-1100-000"
+    verificado: "2026-10-30"
+
+  siatac_ecosistemas:
+    seccion: "2.2"
+    tema: "Ecosistemas terrestres y acuáticos (aguas blancas y negras)"
+    nivel: nacional
+    tipo: arcgis_rest
+    url: "https://gis.siatac.co/arcgis/rest/services/MAC_DatosAbiertos"
+    servicio: "Eco_Region_100K_2024"
+    entidad: "Instituto SINCHI – SIAT-AC"
+    producto: "Ecosistemas por región (2024), escala 1:100.000"
+    escala: "1:100.000"
+    licencia: "CC BY 4.0"
+    url_ficha: "https://datos.siatac.co/datasets/sinchi::ecosistemas-por-región-2024-escala-1100-000"
+    verificado: "2026-10-30"
 
   edificaciones:
     seccion: "2.2"

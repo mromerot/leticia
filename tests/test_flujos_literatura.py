@@ -144,3 +144,36 @@ def test_impacto_climada_coincide_con_integracion_por_escalones():
     # escalones: T10 (frecuencia 0,1 − 0,01) con pérdida 50 y T100 (0,01) con pérdida 150
     assert abs(res["pae"] - (0.09 * 50 + 0.01 * 150)) < 1e-6
     assert res["medidas"].loc["elevar 1 m", "pae"] < res["pae"]
+
+
+def test_siatac_pagina_corrige_tildes_y_fechas(monkeypatch):
+    from leticia import fuentes
+
+    def punto(i):
+        return {"type": "Feature", "geometry": {"type": "Point", "coordinates": [-69.9, -4.2]},
+                "properties": {"objectid": i, "cob_agrup": "Vegetaciòn secundaria", "acq_date": 1726000000000}}
+
+    pedidos = []
+
+    class Respuesta:
+        def __init__(self, datos):
+            self.datos = datos
+
+        def json(self):
+            return self.datos
+
+    def falso_get(url, params=None, **kw):
+        pedidos.append(params)
+        if params.get("returnCountOnly"):
+            return Respuesta({"count": 1500})
+        desde = params["resultOffset"]
+        return Respuesta({"features": [punto(i) for i in range(desde, min(desde + params["resultRecordCount"], 1500))]})
+
+    monkeypatch.setattr(fuentes, "_get", falso_get)
+    monkeypatch.setattr(fuentes, "cache", lambda nombre, fn, forzar=False: fn())
+    g = fuentes.siatac("siatac_coberturas", anio=2022)
+    assert len(g) == 1500 and g["objectid"].is_unique
+    assert [p["resultOffset"] for p in pedidos[1:]] == [0, 1000]
+    assert (g["cob_agrup"] == "Vegetación secundaria").all()
+    assert g["acq_date"].dt.year.eq(2024).all()
+    assert g.crs.to_epsg() == 4326

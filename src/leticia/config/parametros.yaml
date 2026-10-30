@@ -68,6 +68,10 @@ incendios:
   meses_temporada: [8, 9, 10]
   meses_predictor: [3, 4, 5]      # TNA de marzo–mayo: se conoce a comienzos de junio, dos meses antes de la temporada
   anio_inicio_modis: 2003         # primer año completo con Terra y Aqua (el archivo de 2001–2002 está incompleto)
+  # Coberturas del SINCHI (SIAT-AC, 1:100.000) que actúan como combustible en la interfaz urbano-forestal
+  coberturas_combustible_siatac: ["Bosques", "Vegetación secundaria", "Herbazales", "Fragmentados", "Pastizales"]
+  anio_coberturas_siatac: 2022    # último año con leyenda completa y licencia abierta (2023 no es dato abierto)
+  anios_coberturas_siatac: [2002, 2007, 2012, 2014, 2016, 2018, 2020, 2022, 2024]
 
 lluvias:
   umbral_lluvia_fuerte_mm: 50
