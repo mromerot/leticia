@@ -5,7 +5,7 @@ short_title: 3. Análisis
 
 Seis flujos de trabajo, uno por amenaza priorizada en el [perfil de riesgos](../01_conceptos/17_perfil_riesgos.ipynb),
 un flujo de salud (dengue y clima) agregado a partir de la [revisión de la literatura](../01_conceptos/18_revision_literatura.md)
-y una síntesis. Como en SIDRo, cada flujo tiene cuatro páginas de análisis y una de medidas:
+una síntesis y un análisis multiamenaza que las reúne en un solo marco cuantitativo. Como en SIDRo, cada flujo tiene cuatro páginas de análisis y una de medidas:
 
 - **a. Descripción**: la amenaza en Leticia, preguntas, cadena de análisis, datos y limitaciones;
 - **b. Amenaza** (cuaderno): intensidad, frecuencia y tendencias;
@@ -43,6 +43,9 @@ y una síntesis. Como en SIDRo, cada flujo tiene cuatro páginas de análisis y 
 * - [3.8 Síntesis](38_sintesis.ipynb)
   - ¿Dónde se superponen las amenazas y qué hacer primero?
   - Todos los anteriores
+* - [3.9 Análisis multiamenaza](39_multiamenaza.ipynb)
+  - ¿Cuánto se pierde al año en conjunto, a cuántas personas alcanza y cuántos días se interrumpen los servicios?
+  - Nivel del IDEAM, JRC, ERA5, Landsat, DesInventar, UNGRD, ONI
 ```
 
 :::{tip} Ejecutar en Colab

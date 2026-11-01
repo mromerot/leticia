@@ -13,7 +13,8 @@ conservan el nombre `leticia`.
 - Estructura: 1 Conceptos y evidencia (1.1–1.6 + cuaderno 1.7 de perfil de riesgos + 1.8 flujos de la literatura) ·
   2 Fuentes de datos (2.1–2.5 + cuaderno 2.6 de área de estudio) · 3 Análisis: 3.1 inundación, 3.2 sequía y estiaje,
   3.3 erosión, 3.4 calor, 3.5 incendios, 3.6 lluvias y vendavales, 3.7 dengue y clima (cada uno `index.md`,
-  `a_descripcion.md`, `b_amenaza.ipynb`, `c_riesgo.ipynb`, `d_escenarios.ipynb` y `e_medidas.md`) y 3.8 síntesis.
+  `a_descripcion.md`, `b_amenaza.ipynb`, `c_riesgo.ipynb`, `d_escenarios.ipynb` y `e_medidas.md`), 3.8 síntesis y 3.9 análisis multiamenaza (cuaderno único `39_multiamenaza.ipynb`: flujo de seis
+  etapas de 1.1 con cadenas de detonantes, regla del máximo y bandas mínima/media/máxima; parámetros ilustrativos en `parametros.yaml`, sección `multiamenaza`).
 - Medidas (`e_medidas.md`): se clasifican según la Ley 1523 (prevención, mitigación del riesgo, protección financiera;
   preparación y conocimiento cuando aplica) y se marca si son adaptación o tienen cobeneficio de mitigación del cambio
   climático (Ley 1931). Escribir siempre «mitigación del riesgo» o «mitigación del cambio climático» (ver 1.1).

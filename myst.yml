@@ -53,6 +53,7 @@ project:
     - file: book/03_analisis/37_dengue/index.md
       children: [{pattern: "book/03_analisis/37_dengue/?_*.*"}]
     - file: book/03_analisis/38_sintesis.ipynb
+    - file: book/03_analisis/39_multiamenaza.ipynb
     - title: Recursos
       children:
         - file: book/recursos/colab.md

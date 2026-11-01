@@ -80,6 +80,11 @@ valor perdido; para inundación se usa la curva profundidad–daño residencial 
 [@huizinga2017]. La vulnerabilidad social y la sensibilidad se aproximan con **índices** (densidad construida,
 población, cercanía al río, falta de vegetación) cuyos pesos se declaran en `parametros.yaml`.
 
+Las curvas y los pesos pueden provenir de tres fuentes, que cada flujo declara: la **literatura** (como Huizinga),
+el **juicio de expertos** cuando la literatura no cubre el caso y la **calibración con daños observados** en eventos
+históricos [@chen2016multihazard]. Si en Leticia no hay registros de daño suficientes para la tercera, el flujo lo
+dice y usa solo las dos primeras; el rango entre curvas (mínima, media, máxima) expresa esa incertidumbre.
+
 ## Del impacto al riesgo: pérdida anual esperada
 
 Con varios escenarios de periodo de retorno se construye la **curva de excedencia**; el área bajo esa curva es el
@@ -92,11 +97,90 @@ $$ (eq-eai)
 donde $I_k$ es el impacto del escenario $k$ y $\Delta p_k$ el intervalo de probabilidad anual de excedencia que
 representa [@amadio2024ccdr]. Cuando no hay función de daño se reporta la **exposición anual esperada**.
 
+El impacto de cada escenario se calcula elemento por elemento (edificación, celda o persona):
+
+$$
+I_k = P_s \cdot E \cdot V
+$$ (eq-impacto)
+
+donde $P_s$ es la **probabilidad espacial** de que el elemento sea alcanzado en el escenario $k$, $E$ la cantidad
+expuesta (valor o personas) y $V$ la fracción de pérdida que corresponde a la intensidad allí [@chen2016multihazard].
+Cuando la amenaza se mapea como superficie continua con intensidad conocida (una lámina de agua), $P_s$ vale 1 y se
+omite. Se vuelve explícita cuando el proceso no cubre toda el área susceptible, como en la erosión de orillas o el
+fuego.
+
+**Incertidumbre.** Cada ingrediente tiene incertidumbre: el periodo de retorno (intervalo de confianza del ajuste
+GEV), la intensidad, el valor expuesto y la curva de daño. En lugar de un solo valor, se calculan una versión
+**mínima, media y máxima** de cada uno y se obtienen **tres curvas de excedencia** y un EAI con rango. Es una
+simplificación frente a una simulación de Monte Carlo, pero se construye con pocos datos y se comunica con
+facilidad [@chen2016multihazard].
+
 ## Clases relativas de riesgo
 
 Para comparar amenazas dentro de la ciudad, cada flujo transforma sus indicadores en rangos percentiles (0–1), los
 agrupa en cinco clases (muy baja a muy alta) y las cruza en una matriz amenaza × vulnerabilidad. Son clases
 **relativas a Leticia**, útiles para priorizar, no categorías absolutas como las de un estudio de amenaza oficial.
+
+## Flujo de evaluación multiamenaza
+
+En la sección 3 se desarrolla una evaluación del riesgo multiamenaza adaptada de la metodología de evaluación
+cuantitativa de riesgo multiamenaza de Chen et al. [@chen2016multihazard], que va de los datos a las curvas de riesgo
+en seis etapas ({numref}`fig-flujo-multiamenaza`). Sus autores la aplicaron a flujos de detritos y crecidas en los
+Alpes, y aquí se conserva la lógica y no los modelos físicos de ese caso. Este tipo de evaluaciones son un campo por
+desarrollar en Colombia.
+
+```{figure} figuras/flujo_multiamenaza.svg
+:label: fig-flujo-multiamenaza
+:alt: Flujo de seis etapas, de los datos de entrada a la síntesis multiamenaza, con tres cadenas de detonantes (creciente, lluvia intensa y ENSO) y curvas de excedencia mínima, media y máxima.
+:width: 100%
+
+Flujo de evaluación multiamenaza adaptado de Chen et al. [@chen2016multihazard]. Las tres columnas son cadenas de
+amenazas con un mismo detonante; las líneas punteadas llevan la intensidad de cada amenaza hasta el cálculo del
+impacto.
+```
+
+```{list-table} Etapas del flujo y su lugar en el libro
+:header-rows: 1
+:label: tabla-flujo-multiamenaza
+* - Etapa
+  - Qué se hace
+  - Dónde está
+* - 1. Datos de entrada
+  - Series, cartografía y eventos históricos, con sus límites declarados.
+  - Sección 2 y cuaderno 2.6
+* - 2. Amenaza
+  - Escenarios por periodo de retorno (GEV por L-momentos) y mapas de intensidad.
+  - Páginas *b* y *d* de cada flujo
+* - 3. Elementos expuestos
+  - Edificaciones, población repartida entre ellas y exposición sistémica.
+  - Cuaderno 2.6 y páginas *c*
+* - 4. Vulnerabilidad
+  - Curvas de daño e índices, con rango mínimo, medio y máximo.
+  - Páginas *c*
+* - 5. Impacto por escenario
+  - $I_k = P_s \cdot E \cdot V$ y EAI con rango (ecuaciones {eq}`eq-impacto` y {eq}`eq-eai`).
+  - Páginas *c*
+* - 6. Síntesis multiamenaza
+  - Combinación de amenazas y curvas de excedencia por tipo de consecuencia.
+  - Análisis multiamenaza ([3.9](../03_analisis/39_multiamenaza.ipynb))
+```
+
+Cuatro reglas del flujo vienen de ese marco y se aplican en el análisis multiamenaza ([3.9](../03_analisis/39_multiamenaza.ipynb)):
+
+- **Escenarios por detonante.** Una misma causa dispara varias amenazas a la vez. Se agrupan en tres cadenas: la
+  **creciente del río** (inundación, erosión de orillas), la **lluvia intensa y los vendavales**, y la **sequía
+  asociada a ENSO** (vaciante, calor, incendios y dengue). Las amenazas de una cadena comparten escenario y
+  periodo de retorno; las cadenas se tratan como independientes entre sí.
+- **Máximo, no suma, dentro de un detonante.** Si un mismo elemento puede ser alcanzado por dos amenazas de la
+  misma cadena, se toma el mayor impacto, porque una vivienda no pierde dos veces su valor en el mismo evento
+  [@chen2016multihazard]. Entre cadenas independientes el impacto sí se acumula en el EAI.
+- **Una curva por tipo de consecuencia.** No se mezclan unidades. Se reportan por separado la **pérdida económica**
+  donde hay función de daño, las **personas afectadas** y la **interrupción de servicios** (días de aislamiento, de
+  desabastecimiento). Calor, sequía y dengue no se expresan en pesos: se combinan solo dentro de su tipo de
+  consecuencia, con clases relativas.
+- **Escenarios de exposición.** Cuando la cantidad expuesta cambia con la temporada, se calculan escenarios
+  separados, como la temporada alta y baja de turismo en el caso de Chen et al. Para Leticia se evalúan los que
+  los datos permitan sostener (por ejemplo, creciente frente a vaciante), y cada flujo declara los que usa.
 
 (conceptos-medidas)=
 ## Reducción del riesgo, mitigación y adaptación

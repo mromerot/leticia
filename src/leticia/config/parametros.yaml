@@ -99,3 +99,28 @@ vulnerabilidad:
     poblacion: 0.30
     proximidad_rio: 0.20
     baja_vegetacion: 0.20
+
+multiamenaza:
+  # Análisis multiamenaza (3.9), adaptado de Chen et al. (2016). TODOS los valores de este bloque son ILUSTRATIVOS:
+  # son la hipótesis de trabajo de este libro, a validar con la Alcaldía, el CMGRD y expertos locales. Cada uno tiene
+  # un valor mínimo, medio y máximo; el rango entre ellos es la incertidumbre que se propaga hasta las curvas de riesgo.
+  bandas: [minimo, medio, maximo]
+  costo_reposicion_cop_m2: [1000000, 1500000, 2000000]   # COP 2025; el medio es el de `inundacion`
+  factor_curva_danio: [0.8, 1.0, 1.2]                    # multiplica la fracción de daño (con tope en 1)
+  profundidad_minima_m: [0.30, 0.15, 0.05]               # menor umbral = más edificaciones expuestas (banda máxima)
+  # Creciente: la erosión de orillas ocurre en la bajada de las aguas, tras la creciente que satura el barranco.
+  # Fracción de pérdida de las edificaciones dentro de la franja de orilla activa (`erosion.franja_orilla_m`).
+  erosion_fraccion_perdida: [0.05, 0.15, 0.40]
+  # Lluvia intensa: periodos de retorno de la lluvia máxima diaria y fracción de la profundidad de cada depresión
+  # topográfica que se llena con el aguacero (el agua escurre y se infiltra: nunca se llena entera).
+  lluvia:
+    periodos: [2, 5, 10, 25, 50, 100]
+    llenado_depresion: [0.06, 0.08, 0.10, 0.14, 0.18, 0.22]   # valor medio; calibrado al orden de magnitud de la UNGRD (50–300 viviendas por evento)
+    factor_llenado: [0.5, 1.0, 1.5]                            # banda mínima, media y máxima
+  # Vendavales (UNGRD y DesInventar): fracción de pérdida de una vivienda averiada (la destruida pierde todo)
+  vendaval_anios: [2000, 2025]   # años con registro suficiente en DesInventar y UNGRD (los años sin evento cuentan como cero)
+  vendaval_fraccion_averiada: [0.05, 0.15, 0.30]
+  # Sequía y estiaje (sistémica): umbrales de nivel en la regla de Leticia (cm) para contar días de interrupción
+  servicios:
+    umbral_navegacion_cm: 600
+    umbral_aislamiento_cm: 400
