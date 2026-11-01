@@ -520,19 +520,48 @@ def cckp_trayectoria(variable: str, escenarios: list[str] | None = None, percent
 
 
 # ------------------------------------------------------------------ límites, población y edificaciones
+def _municipios_pais() -> gpd.GeoDataFrame:
+    destino = dir_datos() / "raw" / "geoboundaries_COL_ADM2_simplificado.geojson"
+    if not destino.exists():
+        meta = _get(url("limite_municipal")).json()
+        descargar(_github_crudo(meta["simplifiedGeometryGeoJSON"]), destino)
+    return gpd.read_file(destino)
+
+
 def limite_municipal(forzar: bool = False) -> gpd.GeoDataFrame:
     """Polígono del municipio (DANE vía geoBoundaries, versión simplificada)."""
     nombre = aoi_cfg()["municipio"]
 
     def _bajar():
-        meta = _get(url("limite_municipal")).json()
-        destino = dir_datos() / "raw" / "geoboundaries_COL_ADM2_simplificado.geojson"
-        descargar(_github_crudo(meta["simplifiedGeometryGeoJSON"]), destino)
-        g = gpd.read_file(destino)
+        g = _municipios_pais()
         g = g[g["shapeName"].str.casefold() == nombre.casefold()].copy()
         return g[["shapeName", "shapeID", "geometry"]].to_crs(4326)
 
     return cache(f"limite_{aoi_cfg()['slug']}.parquet", _bajar, forzar)
+
+
+def municipios(clave_bbox: str = "bbox_municipio", forzar: bool = False) -> gpd.GeoDataFrame:
+    """Municipios y áreas no municipalizadas que tocan la extensión (DANE vía geoBoundaries), para mapas de contexto."""
+
+    def _bajar():
+        g = _municipios_pais().to_crs(4326)
+        return g[g.intersects(box(*bbox(clave_bbox)))][["shapeName", "shapeID", "geometry"]].reset_index(drop=True)
+
+    return cache(f"municipios_{clave_bbox}.parquet", _bajar, forzar)
+
+
+def natural_earth(capa: str = "paises", forzar: bool = False) -> gpd.GeoDataFrame:
+    """Países o ríos principales de Natural Earth (1:50 millones) para los mapas de localización, en EPSG:4326."""
+
+    def _bajar():
+        destino = dir_datos() / "raw" / Path(url(capa)).name
+        descargar(url(capa), destino)
+        g = gpd.read_file(f"zip://{destino}")
+        g = g.rename(columns=str.lower)
+        columnas = ["iso_a3", "name_es"] if capa == "paises" else ["name_es", "scalerank", "featurecla"]
+        return g[columnas + ["geometry"]].rename(columns={"name_es": "nombre"}).to_crs(4326)
+
+    return cache(f"natural_earth_{capa}.parquet", _bajar, forzar)
 
 
 def _quadkey(lon: float, lat: float, z: int) -> str:
@@ -836,6 +865,7 @@ def raster_estatico(coleccion: str, activo: str, clave_bbox: str = "bbox_regiona
 
     def _bajar():
         import odc.stac
+        import rioxarray  # noqa: F401  (registra el accesor .rio)
 
         items = list(catalogo_pc().search(collections=[coleccion], bbox=b).items())
         if coleccion == "esa-worldcover":

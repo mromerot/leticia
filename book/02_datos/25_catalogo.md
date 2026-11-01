@@ -215,6 +215,18 @@ que el recurso responde desde la nube.
   - 10 m
   - Copernicus (libre)
   - 2026-10-28
+* - **Límites de países (mapa de localización)** (`paises`)
+  - global
+  - Natural Earth: Admin 0 – Countries, escala 1:50 millones (v5) ([enlace](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/))
+  - 1:50.000.000
+  - Dominio público
+  - 2026-11-01
+* - **Ríos principales (mapa de localización)** (`rios_principales`)
+  - global
+  - Natural Earth: Rivers + lake centerlines, escala 1:50 millones (v5) ([enlace](https://www.naturalearthdata.com/downloads/50m-physical-vectors/))
+  - 1:50.000.000
+  - Dominio público
+  - 2026-11-01
 * - **Índice Oceánico El Niño (ONI)** (`indices_oceanicos`)
   - global
   - NOAA Climate Prediction Center: ONI (ERSSTv5), trimestres móviles 1950–presente ([enlace](https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt))

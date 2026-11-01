@@ -1,7 +1,7 @@
 version: 1
 project:
   title: Leticia — riesgos de desastres y climáticos
-  subtitle: Análisis reproducible para Leticia (Amazonas, Colombia) con la estructura de SIDRo
+  subtitle: Evaluación reproducible con datos abiertos para Leticia (Amazonas, Colombia)
   description: Libro reproducible en cuadernos de Colab sobre los riesgos de desastres y climáticos de Leticia, Amazonas — inundación, sequía y estiaje, erosión fluvial, calor, incendios, lluvias intensas y vendavales, y dengue.
   keywords: [riesgo de desastres, riesgo climático, Leticia, Amazonas, Amazonía, río Amazonas, MyST, Colab, CCDR, CLIMAAX]
   authors:

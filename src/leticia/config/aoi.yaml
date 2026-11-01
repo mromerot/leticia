@@ -30,6 +30,29 @@ bbox_ribera: [-70.40, -4.30, -69.85, -3.70]
 # Leticia como humo se quema sobre todo fuera del municipio
 bbox_fuego: [-71.5, -5.5, -68.5, -2.5]
 paises_fuego: ["Colombia", "Peru", "Brazil"]
+# Municipio y vecinos en la triple frontera (panel intermedio del mapa de localización)
+bbox_municipio: [-70.75, -4.45, -69.25, -2.80]
+
+# Mapa de localización (página de inicio y cuaderno 2.6): extensión del panel de contexto, del panel municipal y rótulos
+mapa:
+  contexto: [-81.5, -17.0, -45.0, 12.5]     # norte de Suramérica (lon_min, lat_min, lon_max, lat_max)
+  rotulos_contexto:
+    - {texto: "COLOMBIA", lon: -73.6, lat: 4.2}
+    - {texto: "VENEZUELA", lon: -66.0, lat: 7.3}
+    - {texto: "ECUADOR", lon: -78.9, lat: -1.4}
+    - {texto: "PERÚ", lon: -75.3, lat: -9.6}
+    - {texto: "BRASIL", lon: -55.5, lat: -7.5}
+    - {texto: "BOLIVIA", lon: -65.0, lat: -15.6}
+    - {texto: "río Amazonas", lon: -64.5, lat: -2.75, rotacion: -4, rio: true}
+  rotulos_municipio:
+    - {texto: "PERÚ", lon: -70.45, lat: -4.36}
+    - {texto: "BRASIL", lon: -69.45, lat: -3.30}
+    - {texto: "río Amazonas", lon: -70.48, lat: -3.93, rotacion: 12, rio: true}
+  rotulos_regional:
+    - {texto: "Leticia", lon: -69.912, lat: -4.192, ciudad: true}
+    - {texto: "Tabatinga (Brasil)", lon: -69.900, lat: -4.247}
+    - {texto: "Santa Rosa (Perú)", lon: -69.965, lat: -4.27}
+    - {texto: "río Amazonas", lon: -70.09, lat: -4.20, rotacion: -10, rio: true}
 
 crs_trabajo: "EPSG:9377"     # MAGNA-SIRGAS / Origen-Nacional
 crs_export: "EPSG:4326"

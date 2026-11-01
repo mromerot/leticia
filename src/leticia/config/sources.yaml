@@ -361,6 +361,32 @@ capas:
     verificado: "2026-10-28"
 
   # ============================ 2.4 OTROS ============================
+  paises:
+    seccion: "2.4"
+    tema: "Límites de países (mapa de localización)"
+    nivel: global
+    tipo: http
+    url: "https://naciscdn.org/naturalearth/50m/cultural/ne_50m_admin_0_countries.zip"
+    entidad: "Natural Earth"
+    producto: "Admin 0 – Countries, escala 1:50 millones (v5)"
+    escala: "1:50.000.000"
+    licencia: "Dominio público"
+    url_ficha: "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/"
+    verificado: "2026-11-01"
+
+  rios_principales:
+    seccion: "2.4"
+    tema: "Ríos principales (mapa de localización)"
+    nivel: global
+    tipo: http
+    url: "https://naciscdn.org/naturalearth/50m/physical/ne_50m_rivers_lake_centerlines.zip"
+    entidad: "Natural Earth"
+    producto: "Rivers + lake centerlines, escala 1:50 millones (v5)"
+    escala: "1:50.000.000"
+    licencia: "Dominio público"
+    url_ficha: "https://www.naturalearthdata.com/downloads/50m-physical-vectors/"
+    verificado: "2026-11-01"
+
   indices_oceanicos:
     seccion: "2.4"
     tema: "Índice Oceánico El Niño (ONI)"
