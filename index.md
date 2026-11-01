@@ -17,7 +17,7 @@ sequía y estiaje, erosión y dinámica fluvial, calor extremo, incendios y humo
 dengue) en el clima actual y con escenarios de cambio climático, y derivar de los resultados medidas de reducción del
 riesgo y de adaptación.
 
-**Métodos.** Se integraron 35 fuentes de datos abiertos, nacionales y globales. Entre ellas están la serie diaria del
+**Métodos.** Se integraron 33 fuentes de datos abiertos, nacionales y globales. Entre ellas están la serie diaria del
 nivel del río del IDEAM en Leticia (38 años con datos suficientes), el pronóstico GloFAS y los mapas de inundación
 del JRC. También se usaron imágenes Landsat y Sentinel-2, el agua superficial del JRC y las tasas de erosión de
 orillas de REAL. El clima viene del reanálisis ERA5 y del ensamble CMIP6. Se añadieron los focos de calor de FIRMS,
