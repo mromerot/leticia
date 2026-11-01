@@ -1,7 +1,12 @@
 ---
-title: Leticia — riesgos de desastres y climáticos
-subtitle: Evaluación reproducible con datos abiertos para la ciudad de Leticia, Amazonas (Colombia)
+title: EVA — Evaluación y análisis de riesgos de desastres
+short_title: Inicio
+subtitle: Riesgos de desastres y climáticos de Leticia, Amazonas (Colombia), con datos abiertos y cuadernos reproducibles
 ---
+
+**EVA** reúne datos abiertos, métodos y cuadernos reproducibles para evaluar y analizar los riesgos de desastres y
+climáticos de un territorio, amenaza por amenaza y en conjunto. Su primera aplicación es la ciudad de **Leticia**,
+en la Amazonía colombiana.
 
 ## Resumen
 
@@ -33,7 +38,7 @@ Los métodos son los siguientes:
 - Pronósticos de la temporada de incendios y del dengue evaluados frente a la climatología con validación cruzada.
 - Exposición en una malla de celdas de 200 m, con la población repartida entre las edificaciones.
 
-El análisis está en un paquete de Python y en cuadernos que se ejecutan en Google Colab.
+El análisis de EVA está en un paquete de Python y en cuadernos que se ejecutan en Google Colab.
 
 **Resultados.**
 

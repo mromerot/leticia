@@ -1,9 +1,9 @@
 version: 1
 project:
-  title: Leticia — riesgos de desastres y climáticos
-  subtitle: Evaluación reproducible con datos abiertos para Leticia (Amazonas, Colombia)
-  description: Libro reproducible en cuadernos de Colab sobre los riesgos de desastres y climáticos de Leticia, Amazonas — inundación, sequía y estiaje, erosión fluvial, calor, incendios, lluvias intensas y vendavales, y dengue.
-  keywords: [riesgo de desastres, riesgo climático, Leticia, Amazonas, Amazonía, río Amazonas, MyST, Colab, CCDR, CLIMAAX]
+  title: EVA — Evaluación y análisis de riesgos de desastres
+  subtitle: Riesgos de desastres y climáticos de Leticia (Amazonas, Colombia) con datos abiertos y cuadernos reproducibles
+  description: EVA (Evaluación y análisis de riesgos de desastres) — libro reproducible en cuadernos de Colab sobre los riesgos de desastres y climáticos de Leticia, Amazonas — inundación, sequía y estiaje, erosión fluvial, calor, incendios, lluvias intensas y vendavales, y dengue.
+  keywords: [EVA, riesgo de desastres, riesgo climático, Leticia, Amazonas, Amazonía, río Amazonas, MyST, Colab, CCDR, CLIMAAX]
   authors:
     - name: Mauricio Romero
       orcid: 0000-0003-3282-0372
@@ -36,23 +36,23 @@ project:
         - file: book/02_datos/24_otros.md
         - file: book/02_datos/25_catalogo.md
         - file: book/02_datos/26_area_estudio.ipynb
+    # Las amenazas van en el primer nivel para que el sidebar las muestre siempre, con su ícono (como CLIMAAX)
     - file: book/03_analisis/index.md
-      children:
-        - file: book/03_analisis/31_inundacion/index.md
-          children: [{pattern: "book/03_analisis/31_inundacion/?_*.*"}]
-        - file: book/03_analisis/32_sequia/index.md
-          children: [{pattern: "book/03_analisis/32_sequia/?_*.*"}]
-        - file: book/03_analisis/33_erosion/index.md
-          children: [{pattern: "book/03_analisis/33_erosion/?_*.*"}]
-        - file: book/03_analisis/34_calor/index.md
-          children: [{pattern: "book/03_analisis/34_calor/?_*.*"}]
-        - file: book/03_analisis/35_incendios/index.md
-          children: [{pattern: "book/03_analisis/35_incendios/?_*.*"}]
-        - file: book/03_analisis/36_lluvias_vendavales/index.md
-          children: [{pattern: "book/03_analisis/36_lluvias_vendavales/?_*.*"}]
-        - file: book/03_analisis/37_dengue/index.md
-          children: [{pattern: "book/03_analisis/37_dengue/?_*.*"}]
-        - file: book/03_analisis/38_sintesis.ipynb
+    - file: book/03_analisis/31_inundacion/index.md
+      children: [{pattern: "book/03_analisis/31_inundacion/?_*.*"}]
+    - file: book/03_analisis/32_sequia/index.md
+      children: [{pattern: "book/03_analisis/32_sequia/?_*.*"}]
+    - file: book/03_analisis/33_erosion/index.md
+      children: [{pattern: "book/03_analisis/33_erosion/?_*.*"}]
+    - file: book/03_analisis/34_calor/index.md
+      children: [{pattern: "book/03_analisis/34_calor/?_*.*"}]
+    - file: book/03_analisis/35_incendios/index.md
+      children: [{pattern: "book/03_analisis/35_incendios/?_*.*"}]
+    - file: book/03_analisis/36_lluvias_vendavales/index.md
+      children: [{pattern: "book/03_analisis/36_lluvias_vendavales/?_*.*"}]
+    - file: book/03_analisis/37_dengue/index.md
+      children: [{pattern: "book/03_analisis/37_dengue/?_*.*"}]
+    - file: book/03_analisis/38_sintesis.ipynb
     - title: Recursos
       children:
         - file: book/recursos/colab.md
@@ -64,4 +64,11 @@ site:
   template: book-theme
   options:
     folders: true
-    logo_text: Leticia · riesgos
+    logo: recursos_web/eva/logo.svg
+    logo_dark: recursos_web/eva/logo_oscuro.svg
+    logo_alt: EVA — Evaluación y análisis de riesgos de desastres
+    logo_text: Evaluación y análisis de riesgos de desastres
+    favicon: recursos_web/eva/favicon.png
+    style: recursos_web/eva/eva.css
+  parts:
+    primary_sidebar_footer: recursos_web/eva/pie_sidebar.md

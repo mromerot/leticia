@@ -1,4 +1,6 @@
-# Leticia — riesgos de desastres y climáticos
+# EVA — Evaluación y análisis de riesgos de desastres
+
+<img src="recursos_web/eva/logo.svg" alt="EVA" height="56">
 
 [![Libro](https://img.shields.io/badge/libro-mromerot.github.io%2Fleticia-0b5c8e)](https://mromerot.github.io/leticia/)
 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mromerot/leticia/blob/main/book/01_conceptos/17_perfil_riesgos.ipynb)
@@ -6,7 +8,8 @@
 [![Código: MIT](https://img.shields.io/badge/c%C3%B3digo-MIT-blue)](LICENSE)
 [![Contenido: CC BY 4.0](https://img.shields.io/badge/contenido-CC%20BY%204.0-lightgrey)](https://creativecommons.org/licenses/by/4.0/)
 
-Análisis reproducible de los **riesgos de desastres y climáticos de Leticia** (Amazonas, Colombia), organizado con la
+**EVA** (Evaluación y análisis de riesgos de desastres) es un análisis reproducible de los **riesgos de desastres y
+climáticos de Leticia** (Amazonas, Colombia), su primera aplicación, organizado con la
 estructura de [SIDRo](https://mromerot.github.io/SIDRo/): conceptos y evidencia, fuentes de datos y siete flujos de
 análisis (inundación fluvial, sequía y estiaje, erosión y dinámica fluvial, calor extremo, incendios y humo, lluvias
 intensas y vendavales, y dengue y clima), cada uno con descripción, amenaza, riesgo, escenarios y medidas de

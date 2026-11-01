@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "leticia"
 version = "0.1.0"
-description = "Análisis reproducible de riesgos de desastres y climáticos de Leticia (Amazonas, Colombia), con la estructura de SIDRo"
+description = "EVA — Evaluación y análisis de riesgos de desastres: riesgos de desastres y climáticos de Leticia (Amazonas, Colombia)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

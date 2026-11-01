@@ -1,7 +1,9 @@
-# Leticia — instrucciones para Claude Code
+# EVA — instrucciones para Claude Code
 
-Proyecto: libro reproducible de **riesgos de desastres y climáticos de Leticia (Amazonas, Colombia)** con la
-estructura de SIDRo (https://mromerot.github.io/SIDRo/). Autor: Mauricio Romero. Idioma: **español**.
+Proyecto: **EVA — Evaluación y análisis de riesgos de desastres**, libro reproducible cuya primera aplicación son los
+**riesgos de desastres y climáticos de Leticia (Amazonas, Colombia)**, con la estructura de SIDRo
+(https://mromerot.github.io/SIDRo/). Autor: Mauricio Romero. Idioma: **español**. El repositorio y el paquete
+conservan el nombre `leticia`.
 
 ## Decisiones fijas
 - Plataforma: **MyST** (`myst.yml`), publicada en GitHub Pages (rama `gh-pages`) por `.github/workflows/publicar.yml`.
@@ -21,6 +23,10 @@ estructura de SIDRo (https://mromerot.github.io/SIDRo/). Autor: Mauricio Romero.
 - CRS de trabajo EPSG:9377; rásteres en EPSG:4326.
 - Citas con `[@clave]` contra `references.bib`; citas del inglés = traducción propia; notas de prensa solo para
   hechos recientes, señaladas como tales. No inventar URL.
+- Identidad visual en `recursos_web/eva/`: logo (la E son las tres capas del riesgo: río/amenaza, bosque/exposición,
+  tierra/vulnerabilidad), favicon, íconos circulares de amenaza y `estilo.css` (tamaños de fuente de CCDR-tools,
+  sidebar fijo desde 1024 px). Tras cambiar `estilo.css` o un ícono: `python recursos_web/eva/construir_css.py`
+  (escribe `eva.css`). Las amenazas van en el primer nivel del `toc` de `myst.yml` para que el sidebar las muestre.
 - Serie del IDEAM: se excluye 2007 (cambio del cero de la regla); extremos con GEV por L-momentos.
 
 ## Comandos
